@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { User, userDetailsAttributes } from '../../models/user/user.model';
-import { handleError } from '../../api/functions/handle-error.function';
-import { ApiResponseInterface } from '../../api/interfaces/api-response.interface';
+import { handleError } from '../../functions/handle-error.function';
+import { ApiResponseInterface } from '../../interfaces/api-response.interface';
 
 export const getUserById = async (
 	req: Request,

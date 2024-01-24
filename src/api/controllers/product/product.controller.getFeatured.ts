@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import { handleError } from '../../api/functions/handle-error.function';
+import { handleError } from '../../functions/handle-error.function';
 import {
 	Product,
 	productListAttributes,
 } from '../../models/product/product.model';
-import { ApiResponseInterface } from '../../api/interfaces/api-response.interface';
+import { ApiResponseInterface } from '../../interfaces/api-response.interface';
 
 export const getFeaturedProducts = async (
 	req: Request,

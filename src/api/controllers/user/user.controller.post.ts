@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import { User } from '../../models/user/user.model';
-import { handleError } from '../../api/functions/handle-error.function';
+import { handleError } from '../../functions/handle-error.function';
 import bcrypt from 'bcrypt';
-import { ServerResponse500 } from '../../api/classes/server-response-500.class';
-import { ApiResponseInterface } from '../../api/interfaces/api-response.interface';
+import { ServerResponse500 } from '../../classes/server-response-500.class';
+import { ApiResponseInterface } from '../../interfaces/api-response.interface';
 require('dotenv/config');
 
 export const addUser = async (req: Request, res: Response): Promise<void> => {

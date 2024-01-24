@@ -1,6 +1,6 @@
-import { ServerResponse500 } from '../../api/classes/server-response-500.class';
-import { handleError } from '../../api/functions/handle-error.function';
-import { ApiResponseInterface } from '../../api/interfaces/api-response.interface';
+import { ServerResponse500 } from '../../classes/server-response-500.class';
+import { handleError } from '../../functions/handle-error.function';
+import { ApiResponseInterface } from '../../interfaces/api-response.interface';
 import { Product } from '../../models/product/product.model';
 import { Request, Response } from 'express';
 

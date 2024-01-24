@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { handleError } from '../../api/functions/handle-error.function';
+import { handleError } from '../../functions/handle-error.function';
 import { User } from '../../models/user/user.model';
 import bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
-import { ApiResponseInterface } from '../../api/interfaces/api-response.interface';
+import { ApiResponseInterface } from '../../interfaces/api-response.interface';
 require('dotenv/config');
 
 export const login = async (req: Request, res: Response): Promise<void> => {

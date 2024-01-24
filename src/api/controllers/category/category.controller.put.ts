@@ -1,14 +1,14 @@
+import { handleError } from '../../functions/handle-error.function';
+import { ApiResponseInterface } from '../../interfaces/api-response.interface';
+import { Category } from '../../models/category/category.model';
 import { Request, Response } from 'express';
-import { handleError } from '../../api/functions/handle-error.function';
-import { Product } from '../../models/product/product.model';
-import { ApiResponseInterface } from '../../api/interfaces/api-response.interface';
 
-export const updateProduct = async (
+export const updateCategory = async (
 	req: Request,
 	res: Response
 ): Promise<void> => {
 	try {
-		const product = await Product.findByIdAndUpdate(
+		const category = await Category.findByIdAndUpdate(
 			req.params.id,
 			{
 				...req.body,
@@ -16,10 +16,10 @@ export const updateProduct = async (
 			{ new: true }
 		);
 
-		if (!product) {
+		if (!category) {
 			const response: ApiResponseInterface = {
 				success: false,
-				message: 'Product not found.',
+				message: 'Category not found.',
 				payload: null,
 			};
 
@@ -29,8 +29,8 @@ export const updateProduct = async (
 
 		const response: ApiResponseInterface = {
 			success: true,
-			message: 'Product updated successfully.',
-			payload: product,
+			message: 'Category updated successfully.',
+			payload: null,
 		};
 
 		res.status(200).json(response);

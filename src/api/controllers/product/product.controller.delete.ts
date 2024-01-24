@@ -1,19 +1,14 @@
+import { handleError } from '../../functions/handle-error.function';
 import { Request, Response } from 'express';
-import { handleError } from '../../api/functions/handle-error.function';
-import {
-	Product,
-	productDetailsAttributes,
-} from '../../models/product/product.model';
-import { ApiResponseInterface } from '../../api/interfaces/api-response.interface';
+import { Product } from '../../models/product/product.model';
+import { ApiResponseInterface } from '../../interfaces/api-response.interface';
 
-export const getProductById = async (
+export const deleteProduct = async (
 	req: Request,
 	res: Response
 ): Promise<void> => {
 	try {
-		const product = await Product.findById(req.params.id).select(
-			productDetailsAttributes
-		);
+		const product = await Product.findByIdAndDelete(req.params.id);
 
 		if (!product) {
 			const response: ApiResponseInterface = {
@@ -28,8 +23,8 @@ export const getProductById = async (
 
 		const response: ApiResponseInterface = {
 			success: true,
-			message: 'Product retrieved successfully.',
-			payload: product,
+			message: 'Product deleted successfully.',
+			payload: null,
 		};
 
 		res.status(200).json(response);

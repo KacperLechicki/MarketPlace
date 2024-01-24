@@ -1,5 +1,5 @@
-import { handleError } from '../../api/functions/handle-error.function';
-import { ApiResponseInterface } from '../../api/interfaces/api-response.interface';
+import { handleError } from '../../functions/handle-error.function';
+import { ApiResponseInterface } from '../../interfaces/api-response.interface';
 import { Category } from '../../models/category/category.model';
 import { Request, Response } from 'express';
 

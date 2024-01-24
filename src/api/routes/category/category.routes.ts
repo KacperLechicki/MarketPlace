@@ -1,9 +1,9 @@
 import express from 'express';
-import { getCategories } from '../../../controllers/category/category.controller.get';
-import { getCategoryById } from '../../../controllers/category/category.controller.getById';
-import { addCategory } from '../../../controllers/category/category.controller.post';
-import { updateCategory } from '../../../controllers/category/category.controller.put';
-import { deleteCategory } from '../../../controllers/category/category.controller.delete';
+import { getCategories } from '../../controllers/category/category.controller.get';
+import { getCategoryById } from '../../controllers/category/category.controller.getById';
+import { addCategory } from '../../controllers/category/category.controller.post';
+import { updateCategory } from '../../controllers/category/category.controller.put';
+import { deleteCategory } from '../../controllers/category/category.controller.delete';
 
 const router = express.Router();
 
