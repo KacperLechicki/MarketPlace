@@ -1,21 +1,17 @@
+import { Request, Response } from 'express';
 import { handleError } from '../../api/handle-error';
 import { Product, productListAttributes } from '../../models/product.model';
-import { Request, Response } from 'express';
 
-export const getProducts = async (
+export const getFeaturedProducts = async (
 	req: Request,
 	res: Response
 ): Promise<void> => {
 	try {
-		let filter = {};
+		const count: string = req.params.count ? req.params.count : '0';
 
-		if (req.query.categories && typeof req.query.categories === 'string') {
-			filter = { category: req.query.categories.split(',') };
-		}
-
-		const productsList = await Product.find(filter).select(
-			productListAttributes
-		);
+		const productsList = await Product.find({ isFeatured: true })
+			.limit(parseInt(count))
+			.select(productListAttributes);
 
 		if (!productsList || productsList.length === 0) {
 			res.status(200).json([]);
