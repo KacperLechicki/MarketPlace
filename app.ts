@@ -1,7 +1,7 @@
 import express, { Express } from 'express';
 import { connectDatabase } from './config/database-connection.config';
 import { setMiddleware } from './config/middleware.config';
-import { setAPIRoutes } from './api/api.routes';
+import { setAPIRoutes } from './src/api/api.routes';
 
 export const app: Express = express();
 const port = 3000;
