@@ -1,40 +1,26 @@
 import express, { Express } from 'express';
-import morgan from 'morgan';
-import mongoose from 'mongoose';
+import { connectDatabase } from './src/config/database/database-connection.config';
+import { setMiddleware } from './src/config/middleware/middleware.config';
+import { setAPIRoutes } from './src/api/routes/api-common.routes';
+import { setAuthRoutes } from './src/api/routes/auth-common.routes';
 
-require('dotenv/config');
-
-const app: Express = express();
+export const app: Express = express();
 const port = 3000;
-const api = process.env.API_URL || '';
-const productsRouter = require('./src/modules/products/routers/products.router');
-const cors = require('cors')
-
-app.use(cors());
-app.options('*', cors());
 
 //Middleware
-app.use(express.json());
-app.use(morgan('tiny'));
+setMiddleware();
 
-//API
-app.use(`${api}/products`, productsRouter);
+//API Routes
+setAPIRoutes();
 
-//---------------------------
+//Auth Routes
+setAuthRoutes();
 
-const dbConnectionString = process.env.MONGO_DB_CONNECTION_STRING || '';
+//Database Connection
+connectDatabase();
 
-mongoose
-	.connect(dbConnectionString, {
-		dbName: 'marketplace',
-	})
-	.then((): void => {
-		console.log('Database connected');
-	})
-	.catch((err: string): void => {
-		console.error(err);
-	});
 
+//Server
 app.listen(port, (): void => {
 	console.log(`Server is running on http://localhost:${port}`);
 });
