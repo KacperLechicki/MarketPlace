@@ -2,31 +2,47 @@ import { Request, Response } from 'express';
 import { Product } from '../models/product.model';
 import { ProductInterface } from '../interfaces/product.interface';
 
-export const getProducts = async (req: Request, res: Response): Promise<void> => {
-    const productsList = await Product.find();
+export const getProducts = async (
+	req: Request,
+	res: Response
+): Promise<void> => {
+	try {
+		const productsList = await Product.find();
 
-    if (!productsList) {
-        res.status(500).json({ success: false });
-    }
-    res.send(productsList);
+		if (!productsList || productsList.length === 0) {
+			res.status(200).json([]);
+			return;
+		}
+
+		res.status(200).json(productsList);
+	} catch (error: unknown) {
+		res.status(500).json({
+			success: false,
+			message: 'An error occurred while retrieving the list of products.',
+			error: error,
+		});
+	}
 };
 
-export const createProduct = (req: Request, res: Response): void => {
-    const product = new Product({
-        name: req.body.name,
-        image: req.body.image,
-        stock: req.body.stock,
-    });
+export const createProduct = async (
+	req: Request,
+	res: Response
+): Promise<void> => {
+	try {
+		const product = new Product({
+			name: req.body.name,
+			image: req.body.image,
+			stock: req.body.stock,
+		});
 
-    product
-        .save()
-        .then((createdProduct: ProductInterface): void => {
-            res.status(201).json(createdProduct);
-        })
-        .catch((err: string): void => {
-            res.status(500).json({
-                error: err,
-                success: false,
-            });
-        });
+		const createdProduct: ProductInterface = await product.save();
+
+		res.status(201).json(createdProduct);
+	} catch (error: unknown) {
+		res.status(500).json({
+			success: false,
+			message: 'An error occurred while creating the product.',
+			error: error,
+		});
+	}
 };

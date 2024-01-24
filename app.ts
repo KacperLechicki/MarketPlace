@@ -1,25 +1,16 @@
 import express, { Express } from 'express';
-import morgan from 'morgan';
-import { productRouter } from './src/routes/product.routes';
 import { connectDatabase } from './config/database-connection.config';
+import { setMiddleware } from './config/middleware.config';
+import { setAPIRoutes } from './api/api.routes';
 
-require('dotenv/config');
-
-const app: Express = express();
+export const app: Express = express();
 const port = 3000;
-const cors = require('cors');
-
-const api = process.env.API_URL || '';
-
-app.use(cors());
-app.options('*', cors());
 
 //Middleware
-app.use(express.json());
-app.use(morgan('tiny'));
+setMiddleware();
 
 //API Routes
-app.use(`${api}/products`, productRouter);
+setAPIRoutes();
 
 connectDatabase();
 
