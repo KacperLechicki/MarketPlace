@@ -1,14 +1,15 @@
 import express, { Express } from 'express';
 import morgan from 'morgan';
-import mongoose from 'mongoose';
+import { productRouter } from './src/routes/product.routes';
+import { connectDatabase } from './config/database-connection.config';
 
 require('dotenv/config');
 
 const app: Express = express();
 const port = 3000;
+const cors = require('cors');
+
 const api = process.env.API_URL || '';
-const productsRouter = require('./src/modules/products/routers/products.router');
-const cors = require('cors')
 
 app.use(cors());
 app.options('*', cors());
@@ -17,23 +18,10 @@ app.options('*', cors());
 app.use(express.json());
 app.use(morgan('tiny'));
 
-//API
-app.use(`${api}/products`, productsRouter);
+//API Routes
+app.use(`${api}/products`, productRouter);
 
-//---------------------------
-
-const dbConnectionString = process.env.MONGO_DB_CONNECTION_STRING || '';
-
-mongoose
-	.connect(dbConnectionString, {
-		dbName: 'marketplace',
-	})
-	.then((): void => {
-		console.log('Database connected');
-	})
-	.catch((err: string): void => {
-		console.error(err);
-	});
+connectDatabase();
 
 app.listen(port, (): void => {
 	console.log(`Server is running on http://localhost:${port}`);
