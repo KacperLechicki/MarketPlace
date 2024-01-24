@@ -1,8 +1,9 @@
-import { handleError } from '../../api/handle-error';
+import { handleError } from '../../api/functions/handle-error.function';
+import { ApiResponseInterface } from '../../api/interfaces/api-response.interface';
 import {
 	Category,
 	categoryDetailsAttributes,
-} from '../../models/category.model';
+} from '../../models/category/category.model';
 import { Request, Response } from 'express';
 
 export const getCategoryById = async (
@@ -15,14 +16,23 @@ export const getCategoryById = async (
 		);
 
 		if (!category) {
-			res.status(404).json({
+			const response: ApiResponseInterface = {
 				success: false,
 				message: 'Category not found.',
-			});
+				payload: null,
+			};
+
+			res.status(404).json(response);
 			return;
 		}
 
-		res.status(200).json(category);
+		const response: ApiResponseInterface = {
+			success: true,
+			message: 'Category retrieved successfully.',
+			payload: category,
+		};
+
+		res.status(200).json(response);
 	} catch (error: unknown) {
 		handleError(res, error);
 	}

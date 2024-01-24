@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
-import { handleError } from '../../../api/handle-error';
-import { User } from '../../models/user.model';
+import { handleError } from '../../api/functions/handle-error.function';
+import { User } from '../../models/user/user.model';
 import bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
+import { ApiResponseInterface } from '../../api/interfaces/api-response.interface';
 require('dotenv/config');
 
 export const login = async (req: Request, res: Response): Promise<void> => {
@@ -10,7 +11,13 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 		const user = await User.findOne({ email: req.body.email });
 
 		if (!user) {
-			res.status(404).json({ success: false, message: 'User not found.' });
+			const response: ApiResponseInterface = {
+				success: false,
+				message: 'User not found.',
+				payload: null,
+			};
+
+			res.status(404).json(response);
 			return;
 		}
 
@@ -25,16 +32,21 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 				{ expiresIn: '2h' }
 			);
 
-			res.status(200).json({
+			const response: ApiResponseInterface = {
 				success: true,
 				message: 'User logged in successfully.',
-				token,
-			});
+				payload: token,
+			};
+
+			res.status(200).json(response);
 		} else if (user && !bcrypt.compareSync(req.body.password, user.password)) {
-			res.status(401).json({
+			const response: ApiResponseInterface = {
 				success: false,
 				message: 'Credentials do not match. Authorization failed.',
-			});
+				payload: null,
+			};
+
+			res.status(401).json(response);
 		}
 	} catch (error: unknown) {
 		handleError(res, error);

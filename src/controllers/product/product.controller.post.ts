@@ -1,5 +1,7 @@
-import { handleError } from '../../api/handle-error';
-import { Product } from '../../models/product.model';
+import { ServerResponse500 } from '../../api/classes/server-response-500.class';
+import { handleError } from '../../api/functions/handle-error.function';
+import { ApiResponseInterface } from '../../api/interfaces/api-response.interface';
+import { Product } from '../../models/product/product.model';
 import { Request, Response } from 'express';
 
 export const addProduct = async (
@@ -14,15 +16,17 @@ export const addProduct = async (
 		const createdProduct = await product.save();
 
 		if (!product) {
-			res.status(500).send({ error: 'Product cannot be created.' });
+			res.status(500).send(new ServerResponse500('Product cannot be created.'));
 			return;
 		}
 
-		res.status(201).json({
+		const response: ApiResponseInterface = {
 			success: true,
 			message: 'Product created successfully.',
-			createdProduct,
-		});
+			payload: createdProduct,
+		};
+
+		res.status(201).json(response);
 	} catch (error: unknown) {
 		handleError(res, error);
 	}

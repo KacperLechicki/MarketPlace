@@ -1,5 +1,5 @@
 import { app } from '../../../app';
-import { userRouter } from './user.routes';
+import { userRouter } from './user/user.routes';
 
 require('dotenv/config');
 

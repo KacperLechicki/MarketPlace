@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
-import { handleError } from '../../api/handle-error';
-import { Product } from '../../models/product.model';
+import { handleError } from '../../api/functions/handle-error.function';
+import { Product } from '../../models/product/product.model';
+import { ApiResponseInterface } from '../../api/interfaces/api-response.interface';
 
 export const updateProduct = async (
 	req: Request,
@@ -16,17 +17,23 @@ export const updateProduct = async (
 		);
 
 		if (!product) {
-			res.status(404).json({
+			const response: ApiResponseInterface = {
 				success: false,
 				message: 'Product not found.',
-			});
+				payload: null,
+			};
+
+			res.status(404).json(response);
 			return;
 		}
 
-		res.status(200).json({
+		const response: ApiResponseInterface = {
 			success: true,
 			message: 'Product updated successfully.',
-		});
+			payload: product,
+		};
+
+		res.status(200).json(response);
 	} catch (error: unknown) {
 		handleError(res, error);
 	}

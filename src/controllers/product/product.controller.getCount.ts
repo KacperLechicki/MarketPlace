@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
-import { handleError } from '../../api/handle-error';
-import { Product } from '../../models/product.model';
+import { handleError } from '../../api/functions/handle-error.function';
+import { Product } from '../../models/product/product.model';
+import { ApiResponseInterface } from '../../api/interfaces/api-response.interface';
 
 export const getProductsCount = async (
 	req: Request,
@@ -10,14 +11,23 @@ export const getProductsCount = async (
 		const productsCount = await Product.countDocuments({});
 
 		if (!productsCount) {
-			res.status(404).json({
+			const response: ApiResponseInterface = {
 				success: false,
 				message: 'Products not found.',
-			});
+				payload: null,
+			};
+
+			res.status(404).json(response);
 			return;
 		}
 
-		res.status(200).send({ productsCount });
+		const response: ApiResponseInterface = {
+			success: true,
+			message: 'Products count retrieved successfully.',
+			payload: { productsCount },
+		};
+
+		res.status(200).send(response);
 	} catch (error: unknown) {
 		handleError(res, error);
 	}

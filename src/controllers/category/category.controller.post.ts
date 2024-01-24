@@ -1,5 +1,7 @@
-import { handleError } from '../../api/handle-error';
-import { Category } from '../../models/category.model';
+import { ServerResponse500 } from '../../api/classes/server-response-500.class';
+import { handleError } from '../../api/functions/handle-error.function';
+import { ApiResponseInterface } from '../../api/interfaces/api-response.interface';
+import { Category } from '../../models/category/category.model';
 import { Request, Response } from 'express';
 
 export const addCategory = async (
@@ -14,15 +16,19 @@ export const addCategory = async (
 		const createdCategory = await category.save();
 
 		if (!category) {
-			res.status(500).send({ error: 'Category cannot be created.' });
+			res
+				.status(500)
+				.send(new ServerResponse500('Category cannot be created.'));
 			return;
 		}
 
-		res.status(201).json({
+		const response: ApiResponseInterface = {
 			success: true,
 			message: 'Category created successfully.',
-			createdCategory,
-		});
+			payload: createdCategory,
+		};
+
+		res.status(201).json(response);
 	} catch (error: unknown) {
 		handleError(res, error);
 	}

@@ -1,8 +1,8 @@
 import express, { Express } from 'express';
-import { connectDatabase } from './config/database-connection.config';
-import { setMiddleware } from './config/middleware.config';
-import { setAPIRoutes } from './src/api/api.routes';
-import { setAuthRoutes } from './src/auth/routes/auth.routes';
+import { connectDatabase } from './src/config/database/database-connection.config';
+import { setMiddleware } from './src/config/middleware/middleware.config';
+import { setAPIRoutes } from './src/api/routes/api-common.routes';
+import { setAuthRoutes } from './src/api/routes/auth-common.routes';
 
 export const app: Express = express();
 const port = 3000;
@@ -16,8 +16,11 @@ setAPIRoutes();
 //Auth Routes
 setAuthRoutes();
 
+//Database Connection
 connectDatabase();
 
+
+//Server
 app.listen(port, (): void => {
 	console.log(`Server is running on http://localhost:${port}`);
 });

@@ -1,24 +1,21 @@
 import { Request, Response } from 'express';
+import { User, userDetailsAttributes } from '../../models/user/user.model';
 import { handleError } from '../../api/functions/handle-error.function';
-import {
-	Product,
-	productDetailsAttributes,
-} from '../../models/product/product.model';
 import { ApiResponseInterface } from '../../api/interfaces/api-response.interface';
 
-export const getProductById = async (
+export const getUserById = async (
 	req: Request,
 	res: Response
 ): Promise<void> => {
 	try {
-		const product = await Product.findById(req.params.id).select(
-			productDetailsAttributes
+		const user = await User.findById(req.params.id).select(
+			userDetailsAttributes
 		);
 
-		if (!product) {
+		if (!user) {
 			const response: ApiResponseInterface = {
 				success: false,
-				message: 'Product not found.',
+				message: 'User not found.',
 				payload: null,
 			};
 
@@ -28,8 +25,8 @@ export const getProductById = async (
 
 		const response: ApiResponseInterface = {
 			success: true,
-			message: 'Product retrieved successfully.',
-			payload: product,
+			message: 'User retrieved successfully.',
+			payload: user,
 		};
 
 		res.status(200).json(response);

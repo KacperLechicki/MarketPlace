@@ -1,5 +1,9 @@
-import { handleError } from '../../api/handle-error';
-import { Category, categoryListAttributes } from '../../models/category.model';
+import { handleError } from '../../api/functions/handle-error.function';
+import { ApiResponseInterface } from '../../api/interfaces/api-response.interface';
+import {
+	Category,
+	categoryListAttributes,
+} from '../../models/category/category.model';
 import { Request, Response } from 'express';
 
 export const getCategories = async (
@@ -10,11 +14,23 @@ export const getCategories = async (
 		const categoriesList = await Category.find().select(categoryListAttributes);
 
 		if (!categoriesList || categoriesList.length === 0) {
-			res.status(200).json([]);
+			const response: ApiResponseInterface = {
+				success: false,
+				message: 'Categories not found.',
+				payload: [],
+			};
+
+			res.status(200).json(response);
 			return;
 		}
 
-		res.status(200).json(categoriesList);
+		const response: ApiResponseInterface = {
+			success: true,
+			message: 'Categories retrieved successfully.',
+			payload: categoriesList,
+		};
+
+		res.status(200).json(response);
 	} catch (error: unknown) {
 		handleError(res, error);
 	}

@@ -1,6 +1,10 @@
 import { Request, Response } from 'express';
-import { handleError } from '../../api/handle-error';
-import { Product, productListAttributes } from '../../models/product.model';
+import { handleError } from '../../api/functions/handle-error.function';
+import {
+	Product,
+	productListAttributes,
+} from '../../models/product/product.model';
+import { ApiResponseInterface } from '../../api/interfaces/api-response.interface';
 
 export const getFeaturedProducts = async (
 	req: Request,
@@ -14,11 +18,23 @@ export const getFeaturedProducts = async (
 			.select(productListAttributes);
 
 		if (!productsList || productsList.length === 0) {
-			res.status(200).json([]);
+			const response: ApiResponseInterface = {
+				success: false,
+				message: 'Products not found.',
+				payload: [],
+			};
+
+			res.status(200).json(response);
 			return;
 		}
 
-		res.status(200).json(productsList);
+		const response: ApiResponseInterface = {
+			success: true,
+			message: 'Products retrieved successfully.',
+			payload: productsList,
+		};
+
+		res.status(200).json(response);
 	} catch (error: unknown) {
 		handleError(res, error);
 	}

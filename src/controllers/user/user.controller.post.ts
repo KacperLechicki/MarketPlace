@@ -1,7 +1,9 @@
 import { Request, Response } from 'express';
-import { User } from '../../models/user.model';
-import { handleError } from '../../../api/handle-error';
+import { User } from '../../models/user/user.model';
+import { handleError } from '../../api/functions/handle-error.function';
 import bcrypt from 'bcrypt';
+import { ServerResponse500 } from '../../api/classes/server-response-500.class';
+import { ApiResponseInterface } from '../../api/interfaces/api-response.interface';
 require('dotenv/config');
 
 export const addUser = async (req: Request, res: Response): Promise<void> => {
@@ -14,15 +16,17 @@ export const addUser = async (req: Request, res: Response): Promise<void> => {
 		const createdUser = await user.save();
 
 		if (!user) {
-			res.status(500).send({ error: 'User cannot be created.' });
+			res.status(500).json(new ServerResponse500('User cannot be created.'));
 			return;
 		}
 
-		res.status(201).json({
+		const response: ApiResponseInterface = {
 			success: true,
 			message: 'User created successfully.',
-			createdUser,
-		});
+			payload: createdUser,
+		};
+
+		res.status(201).json(response);
 	} catch (error: unknown) {
 		handleError(res, error);
 	}

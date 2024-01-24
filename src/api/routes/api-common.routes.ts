@@ -1,6 +1,6 @@
-import { app } from '../../app';
-import { categoryRouter } from '../routes/category.routes';
-import { productRouter } from '../routes/product.routes';
+import { app } from '../../../app';
+import { categoryRouter } from './category/category.routes';
+import { productRouter } from './product/product.routes';
 
 require('dotenv/config');
 
