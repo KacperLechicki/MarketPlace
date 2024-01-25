@@ -8,6 +8,8 @@ export const getCategoriesCount = async (
 	res: Response
 ): Promise<void> => {
 	try {
+		// #swagger.summary = 'Get count of categories.'
+
 		const categoriesCount = await Category.countDocuments({});
 
 		if (!categoriesCount) {

@@ -8,6 +8,8 @@ export const deleteProduct = async (
 	res: Response
 ): Promise<void> => {
 	try {
+		// #swagger.summary = 'Delete a product.'
+
 		const product = await Product.findByIdAndDelete(req.params.id);
 
 		if (!product) {

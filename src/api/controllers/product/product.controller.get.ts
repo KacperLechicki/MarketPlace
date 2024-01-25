@@ -11,6 +11,8 @@ export const getProducts = async (
 	res: Response
 ): Promise<void> => {
 	try {
+		// #swagger.summary = 'Get list of products.'
+
 		let filter = {};
 
 		if (req.query.categories && typeof req.query.categories === 'string') {

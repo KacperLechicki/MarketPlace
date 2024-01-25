@@ -8,6 +8,8 @@ export const updateProduct = async (
 	res: Response
 ): Promise<void> => {
 	try {
+		// #swagger.summary = 'Update existing product.'
+
 		const product = await Product.findByIdAndUpdate(
 			req.params.id,
 			{

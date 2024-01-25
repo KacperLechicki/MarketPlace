@@ -9,6 +9,8 @@ export const getUserById = async (
 	res: Response
 ): Promise<void> => {
 	try {
+		// #swagger.summary = 'Get user by id.'
+
 		const userData = await decodeToken(req);
 
 		if (!userData.isAdmin && userData.userId !== req.params.id) {

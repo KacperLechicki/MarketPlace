@@ -8,6 +8,8 @@ export const getUsersCount = async (
 	res: Response
 ): Promise<void> => {
 	try {
+		// #swagger.summary = 'Get count of users.'
+
 		const usersCount = await User.countDocuments({});
 
 		if (!usersCount) {

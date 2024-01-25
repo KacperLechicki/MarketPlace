@@ -8,6 +8,8 @@ export const updateCategory = async (
 	res: Response
 ): Promise<void> => {
 	try {
+		// #swagger.summary = 'Update existing category.'
+
 		const category = await Category.findByIdAndUpdate(
 			req.params.id,
 			{

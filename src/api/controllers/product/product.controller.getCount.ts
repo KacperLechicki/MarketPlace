@@ -8,6 +8,8 @@ export const getProductsCount = async (
 	res: Response
 ): Promise<void> => {
 	try {
+		// #swagger.summary = 'Get count of products.'
+
 		const productsCount = await Product.countDocuments({});
 
 		if (!productsCount) {

@@ -1,0 +1,609 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "3.0.0",
+    "title": "Marketplace API Documentation",
+    "description": "REST API for E-commerce Webshop - Eclectify \n\n **${api} =>** /api/v1 \n\n **${auth} =>** /auth/v1"
+  },
+  "host": "localhost:3000",
+  "basePath": "",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "${api}/products/": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get list of products.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "categories",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Add new product.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "${api}/products/{id}": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get product by id.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Update existing product.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Delete a product.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "${api}/products/statistics/count": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get count of products.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "${api}/products/featured/{count}": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get list of featured products.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "count",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "${api}/categories/": {
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Get list of categories.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Add new category.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "${api}/categories/{id}": {
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Get category by id.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Update existing category.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Delete a category.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "${api}/categories/statistics/count": {
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Get count of categories.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "${auth}/users/": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get list of users.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "${auth}/users/{id}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get user by id.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update existing user.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "isAdmin": {
+                  "example": "any"
+                },
+                "bodyWithoutAdmin": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Delete an user.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "${auth}/users/register": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Add new user.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "${auth}/users/login": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Authorization.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "${auth}/users/statistics/count": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get count of users.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  }
+}

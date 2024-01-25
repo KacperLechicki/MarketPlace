@@ -11,6 +11,8 @@ export const getProductById = async (
 	res: Response
 ): Promise<void> => {
 	try {
+		// #swagger.summary = 'Get product by id.'
+
 		const product = await Product.findById(req.params.id).select(
 			productDetailsAttributes
 		);

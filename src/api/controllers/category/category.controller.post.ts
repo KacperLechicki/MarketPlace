@@ -9,6 +9,8 @@ export const addCategory = async (
 	res: Response
 ): Promise<void> => {
 	try {
+		// #swagger.summary = 'Add new category.'
+
 		let category = new Category({
 			...req.body,
 		});

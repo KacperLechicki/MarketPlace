@@ -8,6 +8,8 @@ export const deleteCategory = async (
 	res: Response
 ): Promise<void> => {
 	try {
+		// #swagger.summary = 'Delete a category.'
+
 		const category = await Category.findByIdAndDelete(req.params.id);
 
 		if (!category) {

@@ -7,6 +7,14 @@ require('dotenv/config');
 const api = process.env.API_URL || '';
 
 export const setAPIRoutes = (): void => {
-	app.use(`${api}/products`, productRouter);
-	app.use(`${api}/categories`, categoryRouter);
+	app.use(
+		`${api}/products`,
+		productRouter
+		// #swagger.tags = ['Product']
+	);
+	app.use(
+		`${api}/categories`,
+		categoryRouter
+		// #swagger.tags = ['Category']
+	);
 };

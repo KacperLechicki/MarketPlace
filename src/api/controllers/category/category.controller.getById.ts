@@ -11,6 +11,8 @@ export const getCategoryById = async (
 	res: Response
 ): Promise<void> => {
 	try {
+		// #swagger.summary = 'Get category by id.'
+
 		const category = await Category.findById(req.params.id).select(
 			categoryDetailsAttributes
 		);

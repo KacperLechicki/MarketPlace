@@ -9,6 +9,8 @@ export const addProduct = async (
 	res: Response
 ): Promise<void> => {
 	try {
+		// #swagger.summary = 'Add new product.'
+
 		let product = new Product({
 			...req.body,
 		});

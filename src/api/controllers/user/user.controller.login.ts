@@ -8,6 +8,8 @@ require('dotenv/config');
 
 export const login = async (req: Request, res: Response): Promise<void> => {
 	try {
+		// #swagger.summary = 'Authorization.'
+
 		const user = await User.findOne({ email: req.body.email });
 
 		if (!user) {

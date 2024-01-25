@@ -11,6 +11,8 @@ export const getFeaturedProducts = async (
 	res: Response
 ): Promise<void> => {
 	try {
+		// #swagger.summary = 'Get list of featured products.'
+
 		const count: string = req.params.count ? req.params.count : '0';
 
 		const productsList = await Product.find({ isFeatured: true })

@@ -11,6 +11,8 @@ export const getCategories = async (
 	res: Response
 ): Promise<void> => {
 	try {
+		// #swagger.summary = 'Get list of categories.'
+
 		const categoriesList = await Category.find().select(categoryListAttributes);
 
 		if (!categoriesList || categoriesList.length === 0) {

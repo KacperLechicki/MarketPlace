@@ -8,6 +8,8 @@ require('dotenv/config');
 
 export const addUser = async (req: Request, res: Response): Promise<void> => {
 	try {
+		// #swagger.summary = 'Add new user.'
+
 		let user = new User({
 			...req.body,
 			password: bcrypt.hashSync(req.body.password, 12),

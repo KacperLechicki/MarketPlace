@@ -6,5 +6,9 @@ require('dotenv/config');
 const auth = process.env.AUTH_URL || '';
 
 export const setAuthRoutes = (): void => {
-	app.use(`${auth}/users`, userRouter);
+	app.use(
+		`${auth}/users`,
+		userRouter
+		// #swagger.tags = ['User']
+	);
 };

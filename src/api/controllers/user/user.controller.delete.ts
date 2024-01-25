@@ -9,6 +9,8 @@ export const deleteUser = async (
 	res: Response
 ): Promise<void> => {
 	try {
+		// #swagger.summary = 'Delete an user.'
+
 		const userData = await decodeToken(req);
 
 		if (!userData.isAdmin && userData.userId !== req.params.id) {

@@ -1,10 +1,14 @@
 import morgan from 'morgan';
 import cors from 'cors';
 import express from 'express';
+import swaggerUI from 'swagger-ui-express';
+import path from 'path';
 import { app } from '../../../app';
 import { JWTGuard } from '../../auth/jwt/jwt.auth';
 import { errorHandler } from '../../api/functions/handle-error.function';
-import { swaggerDocs } from '../swagger/swagger.config';
+require('dotenv/config');
+
+const docs = process.env.DOCS_URL || '';
 
 export const setMiddleware = (): void => {
 	const port = 3000;
@@ -16,8 +20,13 @@ export const setMiddleware = (): void => {
 
 	app.use(morgan('tiny'));
 
-	//Swagger
-	swaggerDocs(app, port);
+	app.use(
+		`${docs}`,
+		swaggerUI.serve,
+		swaggerUI.setup(
+			require(path.resolve(__dirname, '../../../swagger-output.json'))
+		)
+	);
 
 	app.use(JWTGuard());
 	app.use(errorHandler);

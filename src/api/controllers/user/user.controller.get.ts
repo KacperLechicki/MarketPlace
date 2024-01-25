@@ -5,6 +5,8 @@ import { ApiResponseInterface } from '../../interfaces/api-response.interface';
 
 export const getUsers = async (req: Request, res: Response): Promise<void> => {
 	try {
+		// #swagger.summary = 'Get list of users.'
+
 		const usersList = await User.find().select(userListAttributes);
 
 		if (!usersList || usersList.length === 0) {
