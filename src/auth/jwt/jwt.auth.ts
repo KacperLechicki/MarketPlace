@@ -15,6 +15,7 @@ export const JWTGuard = (): PathParams => {
 		isRevoked: isRevoked,
 	}).unless({
 		path: [
+			`http://localhost:3000/docs`,
 			`${auth}/users/login`,
 			`${auth}/users/register`,
 			{ url: new RegExp(`${api}/products.*`), methods: ['GET', 'OPTIONS'] },

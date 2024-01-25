@@ -25,10 +25,12 @@ export const updateUser = async (
 			return;
 		}
 
+		const { isAdmin, ...bodyWithoutAdmin } = req.body;
+
 		const user = await User.findByIdAndUpdate(
 			req.params.id,
 			{
-				...req.body,
+				...bodyWithoutAdmin,
 			},
 			{ new: true }
 		);
