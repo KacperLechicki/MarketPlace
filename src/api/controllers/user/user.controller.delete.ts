@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import { User, userDetailsAttributes } from '../../models/user/user.model';
 import { handleError } from '../../functions/handle-error.function';
+import { User } from '../../models/user/user.model';
 import { ApiResponseInterface } from '../../interfaces/api-response.interface';
 import { decodeToken } from '../../functions/decode-token.function';
 
-export const getUserById = async (
+export const deleteUser = async (
 	req: Request,
 	res: Response
 ): Promise<void> => {
@@ -22,9 +22,7 @@ export const getUserById = async (
 			return;
 		}
 
-		const user = await User.findById(req.params.id).select(
-			userDetailsAttributes
-		);
+		const user = await User.findByIdAndDelete(req.params.id);
 
 		if (!user) {
 			const response: ApiResponseInterface = {
@@ -39,8 +37,8 @@ export const getUserById = async (
 
 		const response: ApiResponseInterface = {
 			success: true,
-			message: 'User retrieved successfully.',
-			payload: user,
+			message: 'User deleted successfully.',
+			payload: null,
 		};
 
 		res.status(200).json(response);

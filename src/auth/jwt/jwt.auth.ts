@@ -1,5 +1,5 @@
-import { Request } from 'express';
 import { PathParams } from 'express-serve-static-core';
+import { isRevoked } from './functions/is-revoked.function';
 require('dotenv/config');
 
 let { expressjwt: jwt } = require('express-jwt');
@@ -19,17 +19,10 @@ export const JWTGuard = (): PathParams => {
 			`${auth}/users/register`,
 			{ url: new RegExp(`${api}/products.*`), methods: ['GET', 'OPTIONS'] },
 			{ url: new RegExp(`${api}/categories.*`), methods: ['GET', 'OPTIONS'] },
+			{
+				url: new RegExp(`${auth}/users/\\w+$`),
+				methods: ['GET', 'PUT', 'DELETE', 'OPTIONS'],
+			},
 		],
 	});
 };
-
-async function isRevoked(
-	req: Request,
-	token: { payload: { isAdmin: boolean } }
-): Promise<boolean> {
-	if (!token.payload.isAdmin) {
-		return true;
-	}
-
-	return false;
-}

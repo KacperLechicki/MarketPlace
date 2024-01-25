@@ -1,20 +1,20 @@
 import { Request, Response } from 'express';
 import { handleError } from '../../functions/handle-error.function';
-import { Product } from '../../models/product/product.model';
 import { ApiResponseInterface } from '../../interfaces/api-response.interface';
+import { User } from '../../models/user/user.model';
 
-export const getProductsCount = async (
+export const getUsersCount = async (
 	req: Request,
 	res: Response
 ): Promise<void> => {
 	try {
-		const productsCount = await Product.countDocuments({});
+		const usersCount = await User.countDocuments({});
 
-		if (!productsCount) {
+		if (!usersCount) {
 			const response: ApiResponseInterface = {
 				success: false,
-				message: 'Products not found.',
-				payload: { productsCount: 0 },
+				message: 'Users not found.',
+				payload: { usersCount: 0 },
 			};
 
 			res.status(404).json(response);
@@ -23,8 +23,8 @@ export const getProductsCount = async (
 
 		const response: ApiResponseInterface = {
 			success: true,
-			message: 'Products count retrieved successfully.',
-			payload: { productsCount },
+			message: 'Users count retrieved successfully.',
+			payload: { usersCount },
 		};
 
 		res.status(200).send(response);

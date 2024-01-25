@@ -1,17 +1,20 @@
 import { Request, Response } from 'express';
-import { User, userDetailsAttributes } from '../../models/user/user.model';
 import { handleError } from '../../functions/handle-error.function';
-import { ApiResponseInterface } from '../../interfaces/api-response.interface';
 import { decodeToken } from '../../functions/decode-token.function';
+import { ApiResponseInterface } from '../../interfaces/api-response.interface';
+import { User } from '../../models/user/user.model';
 
-export const getUserById = async (
+export const updateUser = async (
 	req: Request,
 	res: Response
 ): Promise<void> => {
 	try {
 		const userData = await decodeToken(req);
 
-		if (!userData.isAdmin && userData.userId !== req.params.id) {
+		if (
+			userData.isAdmin ||
+			(!userData.isAdmin && userData.userId !== req.params.id)
+		) {
 			const response: ApiResponseInterface = {
 				success: false,
 				message: 'Unauthorized.',
@@ -22,8 +25,12 @@ export const getUserById = async (
 			return;
 		}
 
-		const user = await User.findById(req.params.id).select(
-			userDetailsAttributes
+		const user = await User.findByIdAndUpdate(
+			req.params.id,
+			{
+				...req.body,
+			},
+			{ new: true }
 		);
 
 		if (!user) {
@@ -39,7 +46,7 @@ export const getUserById = async (
 
 		const response: ApiResponseInterface = {
 			success: true,
-			message: 'User retrieved successfully.',
+			message: 'User updated successfully.',
 			payload: user,
 		};
 

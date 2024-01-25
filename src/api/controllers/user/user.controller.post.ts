@@ -4,7 +4,6 @@ import { handleError } from '../../functions/handle-error.function';
 import bcrypt from 'bcrypt';
 import { ServerResponse500 } from '../../classes/server-response-500.class';
 import { ApiResponseInterface } from '../../interfaces/api-response.interface';
-import mongoose from 'mongoose';
 require('dotenv/config');
 
 export const addUser = async (req: Request, res: Response): Promise<void> => {
@@ -32,7 +31,7 @@ export const addUser = async (req: Request, res: Response): Promise<void> => {
 		if (error.code === 11000 && error.keyPattern.email === 1) {
 			const response: ApiResponseInterface = {
 				success: false,
-				message: 'User already exists.',
+				message: 'User with that e-mail already exists.',
 				payload: null,
 			};
 

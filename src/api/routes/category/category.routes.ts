@@ -4,6 +4,7 @@ import { getCategoryById } from '../../controllers/category/category.controller.
 import { addCategory } from '../../controllers/category/category.controller.post';
 import { updateCategory } from '../../controllers/category/category.controller.put';
 import { deleteCategory } from '../../controllers/category/category.controller.delete';
+import { getCategoriesCount } from '../../controllers/category/category.controller.getCount';
 
 const router = express.Router();
 
@@ -12,5 +13,7 @@ router.get('/:id', getCategoryById);
 router.post('/', addCategory);
 router.put('/:id', updateCategory);
 router.delete('/:id', deleteCategory);
+
+router.get('/statistics/count', getCategoriesCount);
 
 export const categoryRouter = router;
