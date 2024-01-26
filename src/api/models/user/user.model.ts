@@ -16,11 +16,10 @@ const userSchema = new mongoose.Schema({
 	},
 	phone: {
 		type: String,
-		required: true,
+		default: '',
 	},
 	isAdmin: {
 		type: Boolean,
-		required: true,
 		default: false,
 	},
 	address: {
@@ -43,7 +42,11 @@ const userSchema = new mongoose.Schema({
 		country: {
 			type: String,
 			default: '',
-		},
+		}
+	},
+	dateCreated: {
+		type: Date,
+		default: Date.now,
 	},
 });
 
@@ -55,7 +58,8 @@ userSchema.set('toJSON', {
 	virtuals: true,
 });
 
-export const userListAttributes = 'name email isAdmin';
-export const userDetailsAttributes = 'name email phone isAdmin address';
+export const userListAttributes = 'name email isAdmin dateCreated';
+export const userDetailsAttributes =
+	'name email phone isAdmin address dateCreated';
 
 export const User = mongoose.model('User', userSchema);

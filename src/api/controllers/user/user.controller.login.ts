@@ -68,13 +68,13 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 					isAdmin: user.isAdmin,
 				},
 				process.env.TOKEN_USER_SEED as string,
-				{ expiresIn: '2h' }
+				{ expiresIn: '1d' }
 			);
 
 			const response: ApiResponseInterface = {
 				success: true,
 				message: 'User logged in successfully.',
-				payload: token,
+				payload: { token },
 			};
 
 			res.status(200).json(response);

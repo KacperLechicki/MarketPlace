@@ -14,6 +14,7 @@ export const getProducts = async (
 		/* 
 			#swagger.summary = 'Get list of products.'
 			#swagger.parameters['api'] = { description: 'A variable that stores part of the url.' }
+			#swagger.parameters['category'] = { description: 'Categories ids.' }
 
 			#swagger.responses[200] = {
 				schema: { 

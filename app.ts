@@ -7,8 +7,7 @@ import { setAuthRoutes } from './src/api/routes/auth-common.routes';
 export const app: Express = express();
 const port = 3000;
 
-//Middleware
-setMiddleware();
+app.use(express.json());
 
 //API Routes
 setAPIRoutes();
@@ -18,6 +17,9 @@ setAuthRoutes();
 
 //Database Connection
 connectDatabase();
+
+//Middleware
+setMiddleware();
 
 //Server
 app.listen(port, (): void => {

@@ -46,7 +46,7 @@ export const updateCategory = async (
 			{
 				...req.body,
 			},
-			{ new: true }
+			{ new: true, runValidators: true }
 		);
 
 		if (!category) {

@@ -1,6 +1,6 @@
 import { Request } from 'express';
 
-export async function isRevoked(
+export async function isAdmin(
 	req: Request,
 	token: { payload: { isAdmin: boolean } }
 ): Promise<boolean> {

@@ -27,6 +27,12 @@
             "description": "A variable that stores part of the url."
           },
           {
+            "name": "category",
+            "description": "Categories ids.",
+            "in": "query",
+            "type": "string"
+          },
+          {
             "name": "categories",
             "in": "query",
             "type": "string"
@@ -1049,6 +1055,264 @@
             }
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "orderItems": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "${auth}/users/login": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Authorize user.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "User credentials.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "User email"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "User password"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User logged in successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "token"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Credentials do not match. Authorization failed."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "${auth}/users/register": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Add new user.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "User data.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "User name"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "User email"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "User password"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User created successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "createdUser object"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User with that e-mail already exists."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "An error occurred."
+                },
+                "error": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
       }
     },
     "${auth}/users/": {
@@ -1134,29 +1398,6 @@
                 "payload": {
                   "type": "string",
                   "example": "user object"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "success": {
-                  "type": "boolean",
-                  "example": false
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Unauthorized."
-                },
-                "payload": {
-                  "type": "string",
-                  "example": "null"
                 }
               },
               "xml": {
@@ -1266,29 +1507,6 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "success": {
-                  "type": "boolean",
-                  "example": false
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Unauthorized."
-                },
-                "payload": {
-                  "type": "string",
-                  "example": "null"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
           "404": {
             "description": "Not Found",
             "schema": {
@@ -1349,261 +1567,6 @@
                 "message": {
                   "type": "string",
                   "example": "User deleted successfully."
-                },
-                "payload": {
-                  "type": "string",
-                  "example": "null"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "success": {
-                  "type": "boolean",
-                  "example": false
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Unauthorized."
-                },
-                "payload": {
-                  "type": "string",
-                  "example": "null"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "success": {
-                  "type": "boolean",
-                  "example": false
-                },
-                "message": {
-                  "type": "string",
-                  "example": "User not found."
-                },
-                "payload": {
-                  "type": "string",
-                  "example": "null"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          }
-        }
-      }
-    },
-    "${auth}/users/register": {
-      "post": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Add new user.",
-        "description": "",
-        "parameters": [
-          {
-            "name": "auth",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "A variable that stores part of the url."
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "User data.",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "User name"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "User email"
-                },
-                "phone": {
-                  "type": "string",
-                  "example": "111 222 333"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "User password"
-                },
-                "isAdmin": {
-                  "type": "boolean",
-                  "example": false
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "success": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "message": {
-                  "type": "string",
-                  "example": "User created successfully."
-                },
-                "payload": {
-                  "type": "string",
-                  "example": "createdUser object"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "success": {
-                  "type": "boolean",
-                  "example": false
-                },
-                "message": {
-                  "type": "string",
-                  "example": "User with that e-mail already exists."
-                },
-                "payload": {
-                  "type": "string",
-                  "example": "null"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "success": {
-                  "type": "boolean",
-                  "example": false
-                },
-                "message": {
-                  "type": "string",
-                  "example": "An error occurred."
-                },
-                "error": {
-                  "type": "string",
-                  "example": "error"
-                },
-                "payload": {
-                  "type": "string",
-                  "example": "null"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          }
-        }
-      }
-    },
-    "${auth}/users/login": {
-      "post": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Authorize user.",
-        "description": "",
-        "parameters": [
-          {
-            "name": "auth",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "A variable that stores part of the url."
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "User credentials.",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "email": {
-                  "type": "string",
-                  "example": "User email"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "User password"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "success": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "message": {
-                  "type": "string",
-                  "example": "User logged in successfully."
-                },
-                "payload": {
-                  "type": "string",
-                  "example": "token"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "success": {
-                  "type": "boolean",
-                  "example": false
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Credentials do not match. Authorization failed."
                 },
                 "payload": {
                   "type": "string",

@@ -8,22 +8,26 @@ import { ApiResponseInterface } from '../../interfaces/api-response.interface';
 
 export const addOrder = async (req: Request, res: Response): Promise<void> => {
 	try {
-		const orderItemsIds = req.body.orderItems.map(
-			async (orderItem: OrderItemInterface): Promise<void> => {
-				let newOrderItem = new OrderItem({
-					quantity: orderItem.quantity,
-					product: orderItem.product,
-				});
+		const orderItemsIds = Promise.all(
+			req.body.orderItems.map(
+				async (orderItem: OrderItemInterface): Promise<void> => {
+					let newOrderItem = new OrderItem({
+						quantity: orderItem.quantity,
+						product: orderItem.product,
+					});
 
-				newOrderItem = await newOrderItem.save();
+					newOrderItem = await newOrderItem.save();
 
-				return newOrderItem.id;
-			}
+					return newOrderItem.id;
+				}
+			)
 		);
+
+		const orderItemsIdsResolved = await orderItemsIds;
 
 		let order = new Order({
 			...req.body,
-			orderItems: orderItemsIds,
+			orderItems: orderItemsIdsResolved,
 		});
 
 		order = await order.save();

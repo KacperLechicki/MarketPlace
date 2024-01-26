@@ -19,9 +19,7 @@ export const addUser = async (req: Request, res: Response): Promise<void> => {
 				schema: {
 					name: "User name",
 					email: "User email",
-					phone: "111 222 333",
 					password: "User password",
-					isAdmin: false,
 				}
 			}
 
@@ -57,6 +55,9 @@ export const addUser = async (req: Request, res: Response): Promise<void> => {
 		});
 
 		const createdUser = await user.save();
+		const createdUserObject = createdUser.toObject();
+
+		const { password, ...userWithoutPassword } = createdUserObject;
 
 		if (!user) {
 			res.status(500).json(new ServerResponse500('User cannot be created.'));
@@ -66,7 +67,7 @@ export const addUser = async (req: Request, res: Response): Promise<void> => {
 		const response: ApiResponseInterface = {
 			success: true,
 			message: 'User created successfully.',
-			payload: createdUser,
+			payload: userWithoutPassword,
 		};
 
 		res.status(201).json(response);

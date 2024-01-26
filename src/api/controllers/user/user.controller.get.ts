@@ -18,7 +18,9 @@ export const getUsers = async (req: Request, res: Response): Promise<void> => {
 			}
 		*/
 
-		const usersList = await User.find().select(userListAttributes);
+		const usersList = await User.find()
+			.select(userListAttributes)
+			.sort({ dateCreated: -1 });
 
 		if (!usersList || usersList.length === 0) {
 			const response: ApiResponseInterface = {

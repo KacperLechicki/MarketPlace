@@ -12,6 +12,14 @@ const categorySchema = new mongoose.Schema({
 	color: {
 		type: String,
 		required: true,
+		minLength: 7,
+		maxLength: 7,
+		validate: {
+			validator: function (v: string): boolean {
+				return /^#/.test(v);
+			},
+			message: (): string => `Color should start with #`,
+		},
 	},
 });
 

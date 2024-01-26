@@ -18,7 +18,10 @@ export const getOrders = async (req: Request, res: Response): Promise<void> => {
 			}
 		*/
 
-		const orderList = await Order.find().select(orderListAttributes);
+		const orderList = await Order.find()
+			.select(orderListAttributes)
+			.populate('user')
+			.sort({ dateOrdered: -1 });
 
 		if (!orderList || orderList.length === 0) {
 			const response: ApiResponseInterface = {
