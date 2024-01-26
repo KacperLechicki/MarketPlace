@@ -11,7 +11,19 @@ export const getFeaturedProducts = async (
 	res: Response
 ): Promise<void> => {
 	try {
-		// #swagger.summary = 'Get list of featured products.'
+		/* 
+			#swagger.summary = 'Get list of featured products.'
+			#swagger.parameters['api'] = { description: 'A variable that stores part of the url.' }
+			#swagger.parameters['count'] = { description: 'Count of requested feature products.' }
+
+			#swagger.responses[200] = {
+				schema: { 
+					success: true,
+					message: 'Products retrieved successfully.',
+					payload: 'list of featured products',
+				},
+			}
+		*/
 
 		const count: string = req.params.count ? req.params.count : '0';
 
@@ -21,8 +33,8 @@ export const getFeaturedProducts = async (
 
 		if (!productsList || productsList.length === 0) {
 			const response: ApiResponseInterface = {
-				success: false,
-				message: 'Products not found.',
+				success: true,
+				message: 'Products retrieved successfully.',
 				payload: [],
 			};
 

@@ -11,7 +11,27 @@ export const getProductById = async (
 	res: Response
 ): Promise<void> => {
 	try {
-		// #swagger.summary = 'Get product by id.'
+		/* 
+			#swagger.summary = 'Get product by id.'
+			#swagger.parameters['api'] = { description: 'A variable that stores part of the url.' }
+			#swagger.parameters['id'] = { description: 'Id of product.' }
+
+			#swagger.responses[200] = {
+				schema: { 
+					success: true,
+					message: 'Product retrieved successfully.',
+					payload: 'product object',
+				},
+			}
+
+			#swagger.responses[404] = {
+				schema: { 
+					success: false,
+					message: 'Product not found.',
+					payload: 'null',
+				},
+			}
+		*/
 
 		const product = await Product.findById(req.params.id).select(
 			productDetailsAttributes

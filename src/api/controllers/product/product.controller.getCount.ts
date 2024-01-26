@@ -8,7 +8,26 @@ export const getProductsCount = async (
 	res: Response
 ): Promise<void> => {
 	try {
-		// #swagger.summary = 'Get count of products.'
+		/* 
+			#swagger.summary = 'Get count of products.'
+			#swagger.parameters['api'] = { description: 'A variable that stores part of the url.' }
+
+			#swagger.responses[200] = {
+				schema: { 
+					success: true,
+					message: 'Products count retrieved successfully.',
+					payload: 'productsCount: count',
+				},
+			}
+
+			#swagger.responses[404] = {
+				schema: { 
+					success: false,
+					message: 'Products not found.',
+					payload: 'productsCount: 0',
+				},
+			}
+		*/
 
 		const productsCount = await Product.countDocuments({});
 

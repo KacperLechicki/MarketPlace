@@ -4,6 +4,16 @@ import { Error } from 'mongoose';
 import { ApiResponseInterface } from '../interfaces/api-response.interface';
 
 export function handleError(res: Response, error: unknown): void {
+	/* 
+		#swagger.responses[500] = {
+			schema: { 
+				this.success = false,
+				this.message = 'An error occurred.',
+				this.error = error,
+				this.payload = 'null',
+			},
+		} 
+	*/
 	res.status(500).json(new ServerResponse500(error));
 }
 

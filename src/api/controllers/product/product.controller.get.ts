@@ -11,7 +11,18 @@ export const getProducts = async (
 	res: Response
 ): Promise<void> => {
 	try {
-		// #swagger.summary = 'Get list of products.'
+		/* 
+			#swagger.summary = 'Get list of products.'
+			#swagger.parameters['api'] = { description: 'A variable that stores part of the url.' }
+
+			#swagger.responses[200] = {
+				schema: { 
+					success: true,
+					message: 'Products retrieved successfully.',
+					payload: 'list of products',
+				},
+			}
+		*/
 
 		let filter = {};
 
@@ -25,7 +36,7 @@ export const getProducts = async (
 
 		if (!productsList || productsList.length === 0) {
 			const response: ApiResponseInterface = {
-				success: false,
+				success: true,
 				message: 'Products not found.',
 				payload: [],
 			};

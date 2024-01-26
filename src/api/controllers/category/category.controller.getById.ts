@@ -11,7 +11,27 @@ export const getCategoryById = async (
 	res: Response
 ): Promise<void> => {
 	try {
-		// #swagger.summary = 'Get category by id.'
+		/* 
+			#swagger.summary = 'Get category by id.'
+			#swagger.parameters['api'] = { description: 'A variable that stores part of the url.' }
+			#swagger.parameters['id'] = { description: 'Id of category.' }
+
+			#swagger.responses[200] = {
+				schema: { 
+					success: true,
+					message: 'Category retrieved successfully.',
+					payload: 'category object',
+				},
+			}
+
+			#swagger.responses[404] = {
+				schema: { 
+					success: false,
+					message: 'Category not found.',
+					payload: 'null',
+				},
+			}
+		*/
 
 		const category = await Category.findById(req.params.id).select(
 			categoryDetailsAttributes

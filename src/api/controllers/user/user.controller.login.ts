@@ -8,7 +8,44 @@ require('dotenv/config');
 
 export const login = async (req: Request, res: Response): Promise<void> => {
 	try {
-		// #swagger.summary = 'Authorization.'
+		/* 
+			#swagger.summary = 'Authorize user.'
+			#swagger.parameters['auth'] = { description: 'A variable that stores part of the url.' }
+
+			#swagger.parameters['body'] = {
+				in: 'body',
+				description: 'User credentials.',
+				required: true,
+				schema: {
+					email: "User email",
+					password: "User password",
+				}
+			}
+
+			#swagger.responses[200] = {
+				schema: { 
+					success: true,
+					message: 'User logged in successfully.',
+					payload: 'token',
+				},
+			}
+
+			#swagger.responses[401] = {
+				schema: { 
+					success: false,
+					message: 'Credentials do not match. Authorization failed.',
+					payload: 'null',
+				}
+			}
+
+			#swagger.responses[404] = {
+				schema: { 
+					success: false,
+					message: 'User not found.',
+					payload: 'null',
+				}
+			}
+		*/
 
 		const user = await User.findOne({ email: req.body.email });
 

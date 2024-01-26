@@ -9,7 +9,38 @@ export const addCategory = async (
 	res: Response
 ): Promise<void> => {
 	try {
-		// #swagger.summary = 'Add new category.'
+		/* 
+			#swagger.summary = 'Add new category.'
+			#swagger.parameters['api'] = { description: 'A variable that stores part of the url.' }
+
+			#swagger.parameters['body'] = {
+				in: 'body',
+				description: 'Category data.',
+				required: true,
+				schema: {
+					name: "Category name",
+					icon: "Icon",
+					color: "#000000",
+				}
+			}	
+
+			#swagger.responses[201] = {
+				schema: { 
+					success: true,
+					message: 'Category created successfully.',
+					payload: 'createdCategory object',
+				},
+			}
+
+			#swagger.responses[500] = {
+				schema: { 
+					success: false,
+					message: 'An error occurred.',
+					error: 'error',
+					payload: 'null',
+				},
+			}
+		*/
 
 		let category = new Category({
 			...req.body,

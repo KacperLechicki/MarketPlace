@@ -8,7 +8,38 @@ export const updateCategory = async (
 	res: Response
 ): Promise<void> => {
 	try {
-		// #swagger.summary = 'Update existing category.'
+		/* 
+			#swagger.summary = 'Update existing category.'
+			#swagger.parameters['api'] = { description: 'A variable that stores part of the url.' }
+			#swagger.parameters['id'] = { description: 'Id of category.' }
+
+			#swagger.parameters['body'] = {
+				in: 'body',
+				description: 'Category data.',
+				required: false,
+				schema: {
+					name: "Category name",
+					icon: "Icon",
+					color: "#000000",
+				}
+			}
+
+			#swagger.responses[200] = {
+				schema: { 
+					success: true,
+					message: 'Category updated successfully.',
+					payload: 'null',
+				},
+			}
+			
+			#swagger.responses[404] = {
+				schema: { 
+					success: false,
+					message: 'Category not found.',
+					payload: 'null',
+				},
+			} 
+		*/
 
 		const category = await Category.findByIdAndUpdate(
 			req.params.id,

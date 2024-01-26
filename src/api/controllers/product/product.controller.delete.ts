@@ -8,7 +8,27 @@ export const deleteProduct = async (
 	res: Response
 ): Promise<void> => {
 	try {
-		// #swagger.summary = 'Delete a product.'
+		/* 
+			#swagger.summary = 'Delete a product.'
+			#swagger.parameters['api'] = { description: 'A variable that stores part of the url.' }
+			#swagger.parameters['id'] = { description: 'Id of product.' }
+
+			#swagger.responses[200] = {
+				schema: { 
+					success: true,
+					message: 'Product deleted successfully.',
+					payload: 'null',
+				},
+			}
+			
+			#swagger.responses[404] = {
+				schema: { 
+					success: false,
+					message: 'Product not found.',
+					payload: 'null',
+				},
+			} 
+		*/
 
 		const product = await Product.findByIdAndDelete(req.params.id);
 

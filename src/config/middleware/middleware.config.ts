@@ -11,15 +11,6 @@ require('dotenv/config');
 const docs = process.env.DOCS_URL || '';
 
 export const setMiddleware = (): void => {
-	const port = 3000;
-
-	app.use(cors());
-	app.options('*', cors());
-
-	app.use(express.json());
-
-	app.use(morgan('tiny'));
-
 	app.use(
 		`${docs}`,
 		swaggerUI.serve,
@@ -28,6 +19,10 @@ export const setMiddleware = (): void => {
 		)
 	);
 
+	app.use(express.json());
+	app.use(cors());
+	app.options('*', cors());
+	app.use(morgan('tiny'));
 	app.use(JWTGuard());
 	app.use(errorHandler);
 };

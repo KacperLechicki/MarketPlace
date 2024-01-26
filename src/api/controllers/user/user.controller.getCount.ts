@@ -8,7 +8,26 @@ export const getUsersCount = async (
 	res: Response
 ): Promise<void> => {
 	try {
-		// #swagger.summary = 'Get count of users.'
+		/* 
+			#swagger.summary = 'Get count of users.'
+			#swagger.parameters['auth'] = { description: 'A variable that stores part of the url.' }
+
+			#swagger.responses[200] = {
+				schema: { 
+					success: true,
+					message: 'Users count retrieved successfully.',
+					payload: 'usersCount: count',
+				},
+			}
+
+			#swagger.responses[404] = {
+				schema: { 
+					success: false,
+					message: 'Users not found.',
+					payload: 'usersCount: 0',
+				},
+			}
+		*/
 
 		const usersCount = await User.countDocuments({});
 

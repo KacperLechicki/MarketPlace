@@ -11,13 +11,24 @@ export const getCategories = async (
 	res: Response
 ): Promise<void> => {
 	try {
-		// #swagger.summary = 'Get list of categories.'
+		/* 
+			#swagger.summary = 'Get list of categories.'
+			#swagger.parameters['api'] = { description: 'A variable that stores part of the url.' }
+
+			#swagger.responses[200] = {
+				schema: { 
+					success: true,
+					message: 'Categories retrieved successfully.',
+					payload: 'list of categories',
+				},
+			}
+		*/
 
 		const categoriesList = await Category.find().select(categoryListAttributes);
 
 		if (!categoriesList || categoriesList.length === 0) {
 			const response: ApiResponseInterface = {
-				success: false,
+				success: true,
 				message: 'Categories not found.',
 				payload: [],
 			};

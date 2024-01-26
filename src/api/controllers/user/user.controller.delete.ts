@@ -9,7 +9,35 @@ export const deleteUser = async (
 	res: Response
 ): Promise<void> => {
 	try {
-		// #swagger.summary = 'Delete an user.'
+		/* 
+			#swagger.summary = 'Delete an user.'
+			#swagger.parameters['auth'] = { description: 'A variable that stores part of the url.' }
+			#swagger.parameters['id'] = { description: 'Id of user.' }
+
+			#swagger.responses[200] = {
+				schema: { 
+					success: true,
+					message: 'User deleted successfully.',
+					payload: 'null',
+				},
+			}
+
+			#swagger.responses[401] = {
+				schema: { 
+					success: false,
+					message: 'Unauthorized.',
+					payload: 'null',
+				},
+			} 
+			
+			#swagger.responses[404] = {
+				schema: { 
+					success: false,
+					message: 'User not found.',
+					payload: 'null',
+				},
+			} 
+		*/
 
 		const userData = await decodeToken(req);
 

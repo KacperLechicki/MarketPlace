@@ -8,7 +8,26 @@ export const getCategoriesCount = async (
 	res: Response
 ): Promise<void> => {
 	try {
-		// #swagger.summary = 'Get count of categories.'
+		/* 
+			#swagger.summary = 'Get count of categories.'
+			#swagger.parameters['api'] = { description: 'A variable that stores part of the url.' }
+
+			#swagger.responses[200] = {
+				schema: { 
+					success: true,
+					message: 'Categories count retrieved successfully.',
+					payload: 'categoriesCount: count',
+				},
+			}
+
+			#swagger.responses[404] = {
+				schema: { 
+					success: false,
+					message: 'Categories not found.',
+					payload: 'categoriesCount: 0',
+				},
+			}
+		*/
 
 		const categoriesCount = await Category.countDocuments({});
 

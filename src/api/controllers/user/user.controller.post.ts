@@ -8,7 +8,48 @@ require('dotenv/config');
 
 export const addUser = async (req: Request, res: Response): Promise<void> => {
 	try {
-		// #swagger.summary = 'Add new user.'
+		/* 
+			#swagger.summary = 'Add new user.'
+			#swagger.parameters['auth'] = { description: 'A variable that stores part of the url.' }
+
+			#swagger.parameters['body'] = {
+				in: 'body',
+				description: 'User data.',
+				required: true,
+				schema: {
+					name: "User name",
+					email: "User email",
+					phone: "111 222 333",
+					password: "User password",
+					isAdmin: false,
+				}
+			}
+
+			#swagger.responses[201] = {
+				schema: { 
+					success: true,
+					message: 'User created successfully.',
+					payload: 'createdUser object',
+				},
+			}
+
+			#swagger.responses[400] = {
+				schema: { 
+					success: false,
+					message: 'User with that e-mail already exists.',
+					payload: 'null',
+				},
+			}
+
+			#swagger.responses[500] = {
+				schema: { 
+					success: false,
+					message: 'An error occurred.',
+					error: 'error',
+					payload: 'null',
+				},
+			}
+		*/
 
 		let user = new User({
 			...req.body,

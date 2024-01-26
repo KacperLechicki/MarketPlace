@@ -5,13 +5,24 @@ import { ApiResponseInterface } from '../../interfaces/api-response.interface';
 
 export const getUsers = async (req: Request, res: Response): Promise<void> => {
 	try {
-		// #swagger.summary = 'Get list of users.'
+		/* 
+			#swagger.summary = 'Get list of users.'
+			#swagger.parameters['auth'] = { description: 'A variable that stores part of the url.' }
+
+			#swagger.responses[200] = {
+				schema: { 
+					success: true,
+					message: 'Users retrieved successfully.',
+					payload: 'list of users',
+				},
+			}
+		*/
 
 		const usersList = await User.find().select(userListAttributes);
 
 		if (!usersList || usersList.length === 0) {
 			const response: ApiResponseInterface = {
-				success: false,
+				success: true,
 				message: 'Users not found.',
 				payload: [],
 			};

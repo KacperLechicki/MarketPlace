@@ -9,7 +9,35 @@ export const getUserById = async (
 	res: Response
 ): Promise<void> => {
 	try {
-		// #swagger.summary = 'Get user by id.'
+		/* 
+			#swagger.summary = 'Get user by id.'
+			#swagger.parameters['auth'] = { description: 'A variable that stores part of the url.' }
+			#swagger.parameters['id'] = { description: 'Id of user.' }
+
+			#swagger.responses[200] = {
+				schema: { 
+					success: true,
+					message: 'User retrieved successfully.',
+					payload: 'user object',
+				},
+			}
+
+			#swagger.responses[401] = {
+				schema: { 
+					success: false,
+					message: 'Unauthorized.',
+					payload: 'null',
+				},
+			}
+
+			#swagger.responses[404] = {
+				schema: { 
+					success: false,
+					message: 'User not found.',
+					payload: 'null',
+				},
+			}
+		*/
 
 		const userData = await decodeToken(req);
 

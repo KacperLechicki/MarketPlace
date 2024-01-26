@@ -9,7 +9,48 @@ export const updateUser = async (
 	res: Response
 ): Promise<void> => {
 	try {
-		// #swagger.summary = 'Update existing user.'
+		/* 
+			#swagger.summary = 'Update existing user.'
+			#swagger.parameters['auth'] = { description: 'A variable that stores part of the url.' }
+			#swagger.parameters['id'] = { description: 'Id of user.' }
+
+			#swagger.parameters['body'] = {
+				in: 'body',
+				description: 'User data.',
+				required: false,
+				schema: {
+					name: "User name",
+					email: "User email",
+					phone: "111 222 333",
+					password: "User password",
+					isAdmin: false,
+				}
+			}
+
+			#swagger.responses[200] = {
+				schema: { 
+					success: true,
+					message: 'User updated successfully.',
+					payload: 'null',
+				},
+			}
+
+			#swagger.responses[401] = {
+				schema: { 
+					success: false,
+					message: 'Unauthorized.',
+					payload: 'null',
+				},
+			} 
+			
+			#swagger.responses[404] = {
+				schema: { 
+					success: false,
+					message: 'User not found.',
+					payload: 'null',
+				},
+			} 
+		*/
 
 		const userData = await decodeToken(req);
 

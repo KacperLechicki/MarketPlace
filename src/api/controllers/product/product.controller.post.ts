@@ -9,7 +9,46 @@ export const addProduct = async (
 	res: Response
 ): Promise<void> => {
 	try {
-		// #swagger.summary = 'Add new product.'
+		/* 
+			#swagger.summary = 'Add new product.'
+			#swagger.parameters['api'] = { description: 'A variable that stores part of the url.' }
+
+			#swagger.parameters['body'] = {
+				in: 'body',
+				description: 'Product data.',
+				required: true,
+				schema: {
+					name: "Product name",
+					description: "Product short description",
+					longDescription: "Product long description",
+					image: "Path to product image",
+					images: [],
+					brand: "Product brand",
+					price: 10.00,
+					stock: 1,
+					category: "Id of product category",
+					rating: 6,
+					isFeatured: false
+				}
+			}
+
+			#swagger.responses[201] = {
+				schema: { 
+					success: true,
+					message: 'Product created successfully.',
+					payload: 'createdProduct object',
+				},
+			}
+
+			#swagger.responses[500] = {
+				schema: { 
+					success: false,
+					message: 'An error occurred.',
+					error: 'error',
+					payload: 'null',
+				},
+			}
+		*/
 
 		let product = new Product({
 			...req.body,
