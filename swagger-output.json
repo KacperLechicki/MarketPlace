@@ -81,21 +81,8 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "type": "object",
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "example": "string"
-                    },
-                    "description": {
-                      "type": "string",
-                      "example": "Product name"
-                    },
-                    "example": {
-                      "type": "string",
-                      "example": "Laptop"
-                    }
-                  }
+                  "type": "string",
+                  "example": "Product name"
                 },
                 "description": {
                   "type": "string",
@@ -1011,6 +998,49 @@
                 "payload": {
                   "type": "string",
                   "example": "categoriesCount: 0"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "${api}/orders/": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Get list of orders.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Orders retrieved successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "list of orders"
                 }
               },
               "xml": {

@@ -25,6 +25,10 @@ export const JWTGuard = (): PathParams => {
 				url: new RegExp(`${auth}/users/\\w+$`),
 				methods: ['GET', 'PUT', 'DELETE', 'OPTIONS'],
 			},
+			{
+				url: new RegExp(`${api}/orders.*`),
+				methods: ['GET', 'POST', 'OPTIONS'],
+			},
 		],
 	});
 };
