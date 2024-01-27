@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { Category } from '../category/category.model';
 
 const productSchema = new mongoose.Schema({
 	name: {
@@ -38,6 +39,13 @@ const productSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Category',
 		required: true,
+		validate: {
+			validator: async function (categoryId: string): Promise<boolean> {
+				const category = await Category.findById(categoryId);
+				return !!category;
+			},
+			message: 'Category does not exist.',
+		},
 	},
 	stock: {
 		type: Number,

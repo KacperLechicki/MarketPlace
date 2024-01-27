@@ -54,7 +54,7 @@ export const updateProduct = async (
 			{
 				...req.body,
 			},
-			{ new: true }
+			{ new: true, runValidators: true }
 		);
 
 		if (!product) {

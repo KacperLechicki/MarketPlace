@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { Product } from '../product/product.model';
 
 const orderItemSchema = new mongoose.Schema({
 	quantity: {
@@ -8,6 +9,13 @@ const orderItemSchema = new mongoose.Schema({
 	product: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Product',
+		validate: {
+			validator: async function (productId: string): Promise<boolean> {
+				const product = await Product.findById(productId);
+				return !!product;
+			},
+			message: 'Product does not exist.',
+		},
 	},
 });
 

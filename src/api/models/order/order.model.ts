@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import { OrderItem } from './order-item.model';
+import { User } from '../user/user.model';
 
 const orderSchema = new mongoose.Schema({
 	orderItems: [
@@ -6,6 +8,13 @@ const orderSchema = new mongoose.Schema({
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'OrderItem',
 			required: true,
+			validate: {
+				validator: async function (orderItemId: string): Promise<boolean> {
+					const orderItem = await OrderItem.findById(orderItemId);
+					return !!orderItem;
+				},
+				message: 'OrderItem does not exist.',
+			},
 		},
 	],
 	shippingAddress1: {
@@ -42,6 +51,13 @@ const orderSchema = new mongoose.Schema({
 	user: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User',
+		validate: {
+			validator: async function (userId: string): Promise<boolean> {
+				const user = await User.findById(userId);
+				return !!user;
+			},
+			message: 'User does not exist.',
+		},
 	},
 	dateOrdered: {
 		type: Date,
