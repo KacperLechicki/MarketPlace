@@ -4,24 +4,26 @@ import { setMiddleware } from './src/config/middleware/middleware.config';
 import { setAPIRoutes } from './src/api/routes/api-common.routes';
 import { setAuthRoutes } from './src/api/routes/auth-common.routes';
 
+// Initialize express application
 export const app: Express = express();
 const port = 3000;
 
+// Use express.json middleware to parse incoming JSON requests
 app.use(express.json());
 
-//API Routes
+// Set up API routes
 setAPIRoutes();
 
-//Auth Routes
+// Set up authentication routes
 setAuthRoutes();
 
-//Database Connection
+// Connect to the database
 connectDatabase();
 
-//Middleware
+// Set up middleware
 setMiddleware();
 
-//Server
+// Start the server and listen on the specified port
 app.listen(port, (): void => {
 	console.log(`Server is running on http://localhost:${port}`);
 });

@@ -1109,7 +1109,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "User credentials.",
+            "description": "User data.",
             "required": true,
             "schema": {
               "type": "object",
@@ -1142,7 +1142,30 @@
                 },
                 "payload": {
                   "type": "string",
-                  "example": "token"
+                  "example": "{ token }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Email and password are required."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
                 }
               },
               "xml": {
@@ -1161,7 +1184,7 @@
                 },
                 "message": {
                   "type": "string",
-                  "example": "Credentials do not match. Authorization failed."
+                  "example": "Invalid password or e-mail."
                 },
                 "payload": {
                   "type": "string",
@@ -1254,7 +1277,7 @@
                 },
                 "payload": {
                   "type": "string",
-                  "example": "createdUser object"
+                  "example": "{ newUser }"
                 }
               },
               "xml": {
@@ -1273,7 +1296,7 @@
                 },
                 "message": {
                   "type": "string",
-                  "example": "User with that e-mail already exists."
+                  "example": "Email and password are required."
                 },
                 "payload": {
                   "type": "string",
@@ -1296,11 +1319,7 @@
                 },
                 "message": {
                   "type": "string",
-                  "example": "An error occurred."
-                },
-                "error": {
-                  "type": "string",
-                  "example": "error"
+                  "example": "User cannot be created."
                 },
                 "payload": {
                   "type": "string",
@@ -1320,7 +1339,7 @@
         "tags": [
           "User"
         ],
-        "summary": "Get list of users.",
+        "summary": "Get all users.",
         "description": "",
         "parameters": [
           {
@@ -1347,7 +1366,30 @@
                 },
                 "payload": {
                   "type": "string",
-                  "example": "list of users"
+                  "example": "{ usersList }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Users not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "[]"
                 }
               },
               "xml": {
@@ -1363,7 +1405,7 @@
         "tags": [
           "User"
         ],
-        "summary": "Get user by id.",
+        "summary": "Get user by ID.",
         "description": "",
         "parameters": [
           {
@@ -1397,7 +1439,30 @@
                 },
                 "payload": {
                   "type": "string",
-                  "example": "user object"
+                  "example": "{ user }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User ID is required."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
                 }
               },
               "xml": {
@@ -1475,60 +1540,38 @@
                   "type": "string",
                   "example": "User password"
                 },
-                "isAdmin": {
-                  "type": "boolean",
-                  "example": false
+                "address": {
+                  "type": "object",
+                  "properties": {
+                    "street": {
+                      "type": "string",
+                      "example": "Street name"
+                    },
+                    "apartment": {
+                      "type": "string",
+                      "example": "Apartment number"
+                    },
+                    "city": {
+                      "type": "string",
+                      "example": "City name"
+                    },
+                    "zip": {
+                      "type": "string",
+                      "example": "Zip code"
+                    },
+                    "country": {
+                      "type": "string",
+                      "example": "Country name"
+                    }
+                  }
                 }
               }
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "success": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "message": {
-                  "type": "string",
-                  "example": "User updated successfully."
-                },
-                "payload": {
-                  "type": "string",
-                  "example": "null"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "success": {
-                  "type": "boolean",
-                  "example": false
-                },
-                "message": {
-                  "type": "string",
-                  "example": "User not found."
-                },
-                "payload": {
-                  "type": "string",
-                  "example": "null"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
+          "default": {
+            "description": ""
           }
         }
       },
@@ -1536,7 +1579,7 @@
         "tags": [
           "User"
         ],
-        "summary": "Delete an user.",
+        "summary": "Delete a user by ID.",
         "description": "",
         "parameters": [
           {
@@ -1567,6 +1610,29 @@
                 "message": {
                   "type": "string",
                   "example": "User deleted successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User ID is required."
                 },
                 "payload": {
                   "type": "string",
@@ -1609,7 +1675,7 @@
         "tags": [
           "User"
         ],
-        "summary": "Get count of users.",
+        "summary": "Get users count.",
         "description": "",
         "parameters": [
           {
@@ -1636,7 +1702,7 @@
                 },
                 "payload": {
                   "type": "string",
-                  "example": "usersCount: count"
+                  "example": "{ usersCount }"
                 }
               },
               "xml": {
@@ -1651,15 +1717,15 @@
               "properties": {
                 "success": {
                   "type": "boolean",
-                  "example": false
+                  "example": true
                 },
                 "message": {
                   "type": "string",
-                  "example": "Users not found."
+                  "example": "No users found."
                 },
                 "payload": {
                   "type": "string",
-                  "example": "usersCount: 0"
+                  "example": "{ usersCount: 0 }"
                 }
               },
               "xml": {

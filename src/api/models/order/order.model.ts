@@ -17,11 +17,11 @@ const orderSchema = new mongoose.Schema({
 			},
 		},
 	],
-	shippingAddress1: {
+	street: {
 		type: String,
 		required: true,
 	},
-	shippingAddress2: {
+	apartment: {
 		type: String,
 	},
 	city: {
@@ -63,10 +63,6 @@ const orderSchema = new mongoose.Schema({
 		type: Date,
 		default: Date.now,
 	},
-	canceled: {
-		type: Boolean,
-		default: false,
-	},
 });
 
 orderSchema.virtual('id').get(function (): string {
@@ -78,6 +74,8 @@ orderSchema.set('toJSON', {
 });
 
 export const orderListAttributes =
-	'orderItems user dateOrdered totalPrice canceled';
+	'orderItems user dateOrdered totalPrice status';
+export const orderDetailsAttributes =
+	'orderItems street apartment city zip country phone status totalPrice user dateOrdered';
 
 export const Order = mongoose.model('Order', orderSchema);
