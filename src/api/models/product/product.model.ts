@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 import { Category } from '../category/category.model';
+import { Messages } from '../../functions/messages.function';
+import { MessageContext } from '../../interfaces/message-context/message-context.interface';
 
 // Define the product schema
 const productSchema = new mongoose.Schema({
@@ -18,7 +20,7 @@ const productSchema = new mongoose.Schema({
 				return !!category;
 			},
 			// Define the error message for failed validation
-			message: 'Category does not exist.',
+			message: Messages(MessageContext.NOT_EXIST, 'Category'),
 		},
 	},
 	// Define the stock field

@@ -4,7 +4,7 @@ import {
 	Product,
 	productListAttributes,
 } from '../../models/product/product.model';
-import { ApiResponseInterface } from '../../interfaces/api-response.interface';
+import { ApiResponseInterface } from '../../interfaces/api-response/api-response.interface';
 
 /**
  * Get featured products.

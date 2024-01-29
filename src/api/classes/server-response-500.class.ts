@@ -1,4 +1,4 @@
-import { ApiResponseInterface } from '../interfaces/api-response.interface';
+import { ApiResponseInterface } from '../interfaces/api-response/api-response.interface';
 
 /**
  * This class represents a server response for a 500 error.

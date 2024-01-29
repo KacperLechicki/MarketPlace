@@ -3,7 +3,7 @@ import { handleError } from '../../functions/handle-error.function';
 import { User } from '../../models/user/user.model';
 import bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
-import { ApiResponseInterface } from '../../interfaces/api-response.interface';
+import { ApiResponseInterface } from '../../interfaces/api-response/api-response.interface';
 require('dotenv/config');
 
 /**

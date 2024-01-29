@@ -3,7 +3,7 @@ import { User } from '../../models/user/user.model';
 import { handleError } from '../../functions/handle-error.function';
 import bcrypt from 'bcrypt';
 import { ServerResponse500 } from '../../classes/server-response-500.class';
-import { ApiResponseInterface } from '../../interfaces/api-response.interface';
+import { ApiResponseInterface } from '../../interfaces/api-response/api-response.interface';
 require('dotenv/config');
 
 /**
@@ -136,7 +136,7 @@ export const addUser = async (req: Request, res: Response): Promise<void> => {
 		};
 
 		res.status(201).json(response);
-	} catch (error: any) {
+	} catch (error: unknown) {
 		// If an error occurs, handle it
 		handleError(res, error);
 	}

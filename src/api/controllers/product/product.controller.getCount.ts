@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { handleError } from '../../functions/handle-error.function';
 import { Product } from '../../models/product/product.model';
-import { ApiResponseInterface } from '../../interfaces/api-response.interface';
+import { ApiResponseInterface } from '../../interfaces/api-response/api-response.interface';
 
 /**
  * Get products count.

@@ -1,5 +1,5 @@
 import { handleError } from '../../functions/handle-error.function';
-import { ApiResponseInterface } from '../../interfaces/api-response.interface';
+import { ApiResponseInterface } from '../../interfaces/api-response/api-response.interface';
 import {
 	Category,
 	categoryListAttributes,

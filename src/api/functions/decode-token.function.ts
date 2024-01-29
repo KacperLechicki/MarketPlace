@@ -1,12 +1,12 @@
 import { Request } from 'express';
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 
 /**
  * This function decodes the JWT token from the request headers.
  * @param req - The request object from the client.
  * @returns The decoded token if it exists and is valid, otherwise null.
  */
-export async function decodeToken(req: Request): Promise<any> {
+export async function decodeToken(req: Request): Promise<JwtPayload> {
 	// Get the token from the authorization header
 	const token = req.headers.authorization?.split(' ')[1];
 

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { ServerResponse500 } from '../classes/server-response-500.class';
 import { Error } from 'mongoose';
-import { ApiResponseInterface } from '../interfaces/api-response.interface';
+import { ApiResponseInterface } from '../interfaces/api-response/api-response.interface';
 
 /**
  * This function handles errors by sending a 500 response with the error message.

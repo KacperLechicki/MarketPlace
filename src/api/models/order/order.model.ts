@@ -1,6 +1,9 @@
 import mongoose from 'mongoose';
 import { OrderItem } from './order-item.model';
 import { User } from '../user/user.model';
+import { OrderStatus } from '../../interfaces/order-status/order-status.interface';
+import { Messages } from '../../functions/messages.function';
+import { MessageContext } from '../../interfaces/message-context/message-context.interface';
 
 const orderSchema = new mongoose.Schema({
 	orderItems: [
@@ -13,7 +16,7 @@ const orderSchema = new mongoose.Schema({
 					const orderItem = await OrderItem.findById(orderItemId);
 					return !!orderItem;
 				},
-				message: 'OrderItem does not exist.',
+				message: Messages(MessageContext.NOT_EXIST, 'OrderItem'),
 			},
 		},
 	],
@@ -23,6 +26,7 @@ const orderSchema = new mongoose.Schema({
 	},
 	apartment: {
 		type: String,
+		required: true,
 	},
 	city: {
 		type: String,
@@ -42,8 +46,9 @@ const orderSchema = new mongoose.Schema({
 	},
 	status: {
 		type: String,
+		enum: Object.values(OrderStatus), // Ensure the status is one of the values in OrderStatus
 		required: true,
-		default: 'Pending',
+		default: OrderStatus.PENDING,
 	},
 	totalPrice: {
 		type: Number,
@@ -56,7 +61,7 @@ const orderSchema = new mongoose.Schema({
 				const user = await User.findById(userId);
 				return !!user;
 			},
-			message: 'User does not exist.',
+			message: Messages(MessageContext.NOT_EXIST, 'User'),
 		},
 	},
 	dateOrdered: {

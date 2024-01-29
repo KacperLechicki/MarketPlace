@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { User, userDetailsAttributes } from '../../models/user/user.model';
 import { handleError } from '../../functions/handle-error.function';
-import { ApiResponseInterface } from '../../interfaces/api-response.interface';
+import { ApiResponseInterface } from '../../interfaces/api-response/api-response.interface';
 
 /**
  * Get user by ID.

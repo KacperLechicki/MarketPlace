@@ -4,7 +4,7 @@ import {
 	Product,
 	productDetailsAttributes,
 } from '../../models/product/product.model';
-import { ApiResponseInterface } from '../../interfaces/api-response.interface';
+import { ApiResponseInterface } from '../../interfaces/api-response/api-response.interface';
 
 /**
  * Get product by ID.

@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 import { Product } from '../product/product.model';
+import { Messages } from '../../functions/messages.function';
+import { MessageContext } from '../../interfaces/message-context/message-context.interface';
 
 const orderItemSchema = new mongoose.Schema({
 	quantity: {
@@ -14,7 +16,7 @@ const orderItemSchema = new mongoose.Schema({
 				const product = await Product.findById(productId);
 				return !!product;
 			},
-			message: 'Product does not exist.',
+			message: Messages(MessageContext.NOT_EXIST, 'Product'),
 		},
 	},
 });

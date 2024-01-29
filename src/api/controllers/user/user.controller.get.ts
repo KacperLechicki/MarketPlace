@@ -1,7 +1,7 @@
 import { handleError } from '../../functions/handle-error.function';
 import { Request, Response } from 'express';
 import { User, userListAttributes } from '../../models/user/user.model';
-import { ApiResponseInterface } from '../../interfaces/api-response.interface';
+import { ApiResponseInterface } from '../../interfaces/api-response/api-response.interface';
 
 /**
  * Get all users.

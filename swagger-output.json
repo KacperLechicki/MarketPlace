@@ -3,7 +3,7 @@
   "info": {
     "version": "3.0.0",
     "title": "Marketplace API Documentation",
-    "description": "REST API for E-commerce Webshop - Eclectify \n\n **${api} =>** /api/v1 \n\n **${auth} =>** /auth/v1"
+    "description": "REST API for E-commerce Webshop \n\n **${api} =>** /api/v1 \n\n **${auth} =>** /auth/v1"
   },
   "host": "localhost:3000",
   "basePath": "",
@@ -16,7 +16,7 @@
         "tags": [
           "Product"
         ],
-        "summary": "Get list of products.",
+        "summary": "Get all products.",
         "description": "",
         "parameters": [
           {
@@ -54,7 +54,30 @@
                 },
                 "payload": {
                   "type": "string",
-                  "example": "list of products"
+                  "example": "{ productsList }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Products not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ productsList: [] }"
                 }
               },
               "xml": {
@@ -151,7 +174,7 @@
                 },
                 "payload": {
                   "type": "string",
-                  "example": "createdProduct object"
+                  "example": "{ createdProduct }"
                 }
               },
               "xml": {
@@ -170,11 +193,7 @@
                 },
                 "message": {
                   "type": "string",
-                  "example": "An error occurred."
-                },
-                "error": {
-                  "type": "string",
-                  "example": "error"
+                  "example": "Product cannot be created."
                 },
                 "payload": {
                   "type": "string",
@@ -194,7 +213,7 @@
         "tags": [
           "Product"
         ],
-        "summary": "Get product by id.",
+        "summary": "Get product by ID.",
         "description": "",
         "parameters": [
           {
@@ -228,7 +247,7 @@
                 },
                 "payload": {
                   "type": "string",
-                  "example": "product object"
+                  "example": "{ product }"
                 }
               },
               "xml": {
@@ -355,7 +374,7 @@
                 },
                 "payload": {
                   "type": "string",
-                  "example": "null"
+                  "example": "{ product }"
                 }
               },
               "xml": {
@@ -392,7 +411,7 @@
         "tags": [
           "Product"
         ],
-        "summary": "Delete a product.",
+        "summary": "Delete a product by ID.",
         "description": "",
         "parameters": [
           {
@@ -465,7 +484,7 @@
         "tags": [
           "Product"
         ],
-        "summary": "Get count of products.",
+        "summary": "Get products count.",
         "description": "",
         "parameters": [
           {
@@ -492,7 +511,7 @@
                 },
                 "payload": {
                   "type": "string",
-                  "example": "productsCount: count"
+                  "example": "{ productsCount }"
                 }
               },
               "xml": {
@@ -515,7 +534,7 @@
                 },
                 "payload": {
                   "type": "string",
-                  "example": "productsCount: 0"
+                  "example": "{ productsCount: 0 }"
                 }
               },
               "xml": {
@@ -531,7 +550,7 @@
         "tags": [
           "Product"
         ],
-        "summary": "Get list of featured products.",
+        "summary": "Get featured products.",
         "description": "",
         "parameters": [
           {
@@ -565,7 +584,30 @@
                 },
                 "payload": {
                   "type": "string",
-                  "example": "list of featured products"
+                  "example": "{ productsList }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Products not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ productsList: [] }"
                 }
               },
               "xml": {
@@ -631,7 +673,7 @@
                 },
                 "payload": {
                   "type": "string",
-                  "example": "[]"
+                  "example": "{ categoriesList: [] }"
                 }
               },
               "xml": {
@@ -1038,7 +1080,7 @@
         "tags": [
           "Order"
         ],
-        "summary": "Get list of orders.",
+        "summary": "Get all orders.",
         "description": "",
         "parameters": [
           {
@@ -1065,7 +1107,30 @@
                 },
                 "payload": {
                   "type": "string",
-                  "example": "list of orders"
+                  "example": "{ orderList }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Orders not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ orderList: [] }"
                 }
               },
               "xml": {
@@ -1079,33 +1144,194 @@
         "tags": [
           "Order"
         ],
+        "summary": "Add new order.",
         "description": "",
         "parameters": [
           {
             "name": "api",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "A variable that stores part of the url."
           },
           {
             "name": "body",
             "in": "body",
+            "description": "Order data.",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "orderItems": {
-                  "example": "any"
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "product": {
+                        "type": "string",
+                        "example": "productID"
+                      },
+                      "quantity": {
+                        "type": "number",
+                        "example": 2
+                      }
+                    }
+                  }
+                },
+                "shippingAddress1": {
+                  "type": "string",
+                  "example": "Addres 1/4"
+                },
+                "city": {
+                  "type": "string",
+                  "example": "London2"
+                },
+                "zip": {
+                  "type": "string",
+                  "example": "888-123"
+                },
+                "country": {
+                  "type": "string",
+                  "example": "UK2"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "111 222 333"
+                },
+                "totalPrice": {
+                  "type": "number",
+                  "example": 123
+                },
+                "user": {
+                  "type": "string",
+                  "example": "UserID"
                 }
               }
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Order created successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ order }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Order cannot be created."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "${api}/orders/{id}": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Get order by ID.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of order."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Order retrieved successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ order }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Order not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
@@ -1408,7 +1634,7 @@
                 },
                 "payload": {
                   "type": "string",
-                  "example": "[]"
+                  "example": "{ usersList: [] }"
                 }
               },
               "xml": {

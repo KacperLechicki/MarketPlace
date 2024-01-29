@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { handleError } from '../../functions/handle-error.function';
 import { User } from '../../models/user/user.model';
-import { ApiResponseInterface } from '../../interfaces/api-response.interface';
+import { ApiResponseInterface } from '../../interfaces/api-response/api-response.interface';
 
 /**
  * Delete a user by ID.
@@ -51,7 +51,7 @@ export const deleteUser = async (
 					},
 				} 
 			*/
-			
+
 			const response: ApiResponseInterface = {
 				success: false,
 				message: 'User not found.',
