@@ -6,38 +6,37 @@ import {
 } from '../../models/category/category.model';
 import { Request, Response } from 'express';
 
+/**
+ * Get category by ID.
+ */
 export const getCategoryById = async (
 	req: Request,
 	res: Response
 ): Promise<void> => {
+	/*
+		#swagger.summary = 'Get category by ID.'
+        #swagger.parameters['api'] = { description: 'A variable that stores part of the url.' }
+        #swagger.parameters['id'] = { description: 'Id of category.' }
+	*/
+
 	try {
-		/* 
-			#swagger.summary = 'Get category by id.'
-			#swagger.parameters['api'] = { description: 'A variable that stores part of the url.' }
-			#swagger.parameters['id'] = { description: 'Id of category.' }
-
-			#swagger.responses[200] = {
-				schema: { 
-					success: true,
-					message: 'Category retrieved successfully.',
-					payload: 'category object',
-				},
-			}
-
-			#swagger.responses[404] = {
-				schema: { 
-					success: false,
-					message: 'Category not found.',
-					payload: 'null',
-				},
-			}
-		*/
-
+		// Try to find the category by its ID and select only the attributes defined in categoryDetailsAttributes
 		const category = await Category.findById(req.params.id).select(
 			categoryDetailsAttributes
 		);
 
+		// If the category was not found, return a 404 response
 		if (!category) {
+			/*
+				#swagger.responses[404] = {
+					schema: { 
+						success: false,
+						message: 'Category not found.',
+						payload: 'null',
+					},
+				}
+			*/
+
 			const response: ApiResponseInterface = {
 				success: false,
 				message: 'Category not found.',
@@ -48,14 +47,26 @@ export const getCategoryById = async (
 			return;
 		}
 
+		/*
+			#swagger.responses[200] = {
+                schema: { 
+                    success: true,
+                    message: 'Category retrieved successfully.',
+                    payload: '{ category }',
+                },
+            }
+		*/
+
+		// If the category was found, return a success response with the category
 		const response: ApiResponseInterface = {
 			success: true,
 			message: 'Category retrieved successfully.',
-			payload: category,
+			payload: { category },
 		};
 
 		res.status(200).json(response);
-	} catch (error: unknown) {
+	} catch (error) {
+		// If an error occurred while trying to retrieve the category, handle it
 		handleError(res, error);
 	}
 };

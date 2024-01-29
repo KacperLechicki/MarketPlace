@@ -581,7 +581,7 @@
         "tags": [
           "Category"
         ],
-        "summary": "Get list of categories.",
+        "summary": "Get all categories.",
         "description": "",
         "parameters": [
           {
@@ -608,7 +608,30 @@
                 },
                 "payload": {
                   "type": "string",
-                  "example": "list of categories"
+                  "example": "{ categoriesList }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Categories not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "[]"
                 }
               },
               "xml": {
@@ -672,7 +695,7 @@
                 },
                 "payload": {
                   "type": "string",
-                  "example": "createdCategory object"
+                  "example": "{ createdCategory }"
                 }
               },
               "xml": {
@@ -691,11 +714,7 @@
                 },
                 "message": {
                   "type": "string",
-                  "example": "An error occurred."
-                },
-                "error": {
-                  "type": "string",
-                  "example": "error"
+                  "example": "Category cannot be created."
                 },
                 "payload": {
                   "type": "string",
@@ -715,7 +734,7 @@
         "tags": [
           "Category"
         ],
-        "summary": "Get category by id.",
+        "summary": "Get category by ID.",
         "description": "",
         "parameters": [
           {
@@ -749,7 +768,7 @@
                 },
                 "payload": {
                   "type": "string",
-                  "example": "category object"
+                  "example": "{ category }"
                 }
               },
               "xml": {
@@ -843,7 +862,7 @@
                 },
                 "payload": {
                   "type": "string",
-                  "example": "null"
+                  "example": "{ category }"
                 }
               },
               "xml": {
@@ -880,7 +899,7 @@
         "tags": [
           "Category"
         ],
-        "summary": "Delete a category.",
+        "summary": "Delete a category by ID.",
         "description": "",
         "parameters": [
           {
@@ -953,7 +972,7 @@
         "tags": [
           "Category"
         ],
-        "summary": "Get count of categories.",
+        "summary": "Get categories count.",
         "description": "",
         "parameters": [
           {
@@ -980,7 +999,7 @@
                 },
                 "payload": {
                   "type": "string",
-                  "example": "categoriesCount: count"
+                  "example": "{ categoriesCount }"
                 }
               },
               "xml": {
@@ -1003,7 +1022,7 @@
                 },
                 "payload": {
                   "type": "string",
-                  "example": "categoriesCount: 0"
+                  "example": "{ categoriesCount: 0 }"
                 }
               },
               "xml": {
@@ -1296,7 +1315,7 @@
                 },
                 "message": {
                   "type": "string",
-                  "example": "Email and password are required."
+                  "example": "Password must contain at least one special character."
                 },
                 "payload": {
                   "type": "string",
@@ -1536,10 +1555,6 @@
                   "type": "string",
                   "example": "111 222 333"
                 },
-                "password": {
-                  "type": "string",
-                  "example": "User password"
-                },
                 "address": {
                   "type": "object",
                   "properties": {
@@ -1570,8 +1585,74 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User updated successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ updatedUser }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Password cannot be changed."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       },

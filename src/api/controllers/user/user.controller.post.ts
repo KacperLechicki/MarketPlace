@@ -29,18 +29,18 @@ export const addUser = async (req: Request, res: Response): Promise<void> => {
 	*/
 
 	try {
-		/*
-			#swagger.responses[400] = {
-				schema: { 
-					success: false,
-					message: 'Email and password are required.',
-					payload: 'null',
-				},
-			}
-		*/
-
 		// Check if the necessary data (email and password) are provided
 		if (!req.body.email || !req.body.password) {
+			/*
+				#swagger.responses[400] = {
+					schema: { 
+						success: false,
+						message: 'Email and password are required.',
+						payload: 'null',
+					},
+				}
+			*/
+
 			res.status(400).json({
 				success: false,
 				message: 'Email and password are required.',
@@ -49,18 +49,18 @@ export const addUser = async (req: Request, res: Response): Promise<void> => {
 			return;
 		}
 
-		/*
-			#swagger.responses[400] = {
-				schema: { 
-					success: false,
-					message: 'Password must be at least 8 characters long.',
-					payload: 'null',
-				},
-			}
-		*/
-
 		// Check if the password is at least 8 characters long
 		if (req.body.password.length < 8) {
+			/*
+				#swagger.responses[400] = {
+					schema: { 
+						success: false,
+						message: 'Password must be at least 8 characters long.',
+						payload: 'null',
+					},
+				}
+			*/
+
 			res.status(400).json({
 				success: false,
 				message: 'Password must be at least 8 characters long.',
@@ -69,19 +69,19 @@ export const addUser = async (req: Request, res: Response): Promise<void> => {
 			return;
 		}
 
-		/*
-			#swagger.responses[400] = {
-				schema: { 
-					success: false,
-					message: 'Password must contain at least one special character.',
-					payload: 'null',
-				},
-			}
-		*/
-
 		// Check if the password contains at least one special character
 		const specialCharacterRegex = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 		if (!specialCharacterRegex.test(req.body.password)) {
+			/*
+				#swagger.responses[400] = {
+					schema: { 
+						success: false,
+						message: 'Password must contain at least one special character.',
+						payload: 'null',
+					},
+				}
+			*/
+
 			res.status(400).json({
 				success: false,
 				message: 'Password must contain at least one special character.',
@@ -99,18 +99,18 @@ export const addUser = async (req: Request, res: Response): Promise<void> => {
 		// Save the user to the database
 		const createdUser = await user.save();
 
-		/*
-			#swagger.responses[500] = {
-				schema: { 
-					success: false,
-					message: 'User cannot be created.',
-					payload: 'null',
-				},
-			}
-		*/
-
 		// If the user cannot be saved, return a 500 error
 		if (!createdUser) {
+			/*
+				#swagger.responses[500] = {
+					schema: { 
+						success: false,
+						message: 'User cannot be created.',
+						payload: 'null',
+					},
+				}
+			*/
+
 			res.status(500).json(new ServerResponse500('User cannot be created.'));
 			return;
 		}

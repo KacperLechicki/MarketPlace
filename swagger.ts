@@ -10,7 +10,7 @@ const doc = {
 		title: 'Marketplace API Documentation',
 		// Description of the API
 		description:
-			'REST API for E-commerce Webshop - Eclectify \n\n **${api} =>** /api/v1 \n\n **${auth} =>** /auth/v1',
+			'REST API for E-commerce Webshop \n\n **${api} =>** /api/v1 \n\n **${auth} =>** /auth/v1',
 	},
 	// Base path for the API endpoints
 	basePath: '',

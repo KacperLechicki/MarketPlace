@@ -15,10 +15,15 @@ const categorySchema = new mongoose.Schema({
 		minLength: 7,
 		maxLength: 7,
 		validate: {
+			// Validator function to check if the value is a valid HEX color code
 			validator: function (v: string): boolean {
-				return /^#/.test(v);
+				// Regular expression for a HEX color code
+				const hexColorCodeRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+				// Test the value against the regular expression
+				return hexColorCodeRegex.test(v);
 			},
-			message: (): string => `Color should start with #`,
+			// Message to return if the validation fails
+			message: (): string => `Color should be a valid HEX color code.`,
 		},
 	},
 });

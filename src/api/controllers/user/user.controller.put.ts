@@ -25,7 +25,6 @@ export const updateUser = async (
                 name: 'User name',
                 email: 'User email',
                 phone: '111 222 333',
-                password: 'User password',
 				address: {
 					street: 'Street name',
 					apartment: 'Apartment number',
@@ -33,24 +32,23 @@ export const updateUser = async (
 					zip: 'Zip code',
 					country: 'Country name'
 				},
-				}
             }
         }
 	*/
 
 	try {
-		/*
-			#swagger.responses[400] = {
-				schema: { 
-					success: false,
-					message: 'User ID is required.',
-					payload: 'null',
-				},
-			}
-		*/
-
 		// Check if the user ID is provided
 		if (!req.params.id) {
+			/*
+				#swagger.responses[400] = {
+					schema: { 
+						success: false,
+						message: 'User ID is required.',
+						payload: 'null',
+					},
+				}
+			*/
+
 			res.status(400).json({
 				success: false,
 				message: 'User ID is required.',
@@ -62,17 +60,17 @@ export const updateUser = async (
 		// Remove the isAdmin field from the request body to prevent unauthorized privilege escalation
 		const { isAdmin, ...bodyWithoutAdmin } = req.body;
 
-		/*
-			#swagger.responses[400] = {
-				schema: { 
-					success: false,
-					message: 'Password cannot be changed.',
-					payload: 'null',
-				},
-			}
-		*/
-
 		if ('password' in bodyWithoutAdmin) {
+			/*
+				#swagger.responses[400] = {
+					schema: { 
+						success: false,
+						message: 'Password cannot be changed.',
+						payload: 'null',
+					},
+				}
+			*/
+
 			res.status(400).json({
 				success: false,
 				message: 'Password cannot be changed.',
@@ -90,18 +88,18 @@ export const updateUser = async (
 			{ new: true, runValidators: true }
 		);
 
-		/*
-			#swagger.responses[404] = {
-				schema: { 
-					success: false,
-					message: 'User not found.',
-					payload: 'null',
-				},
-			}
-		*/
-
 		// If the user is not found, return a 404 response
 		if (!user) {
+			/*
+				#swagger.responses[404] = {
+					schema: { 
+						success: false,
+						message: 'User not found.',
+						payload: 'null',
+					},
+				}
+			*/
+
 			const response: ApiResponseInterface = {
 				success: false,
 				message: 'User not found.',

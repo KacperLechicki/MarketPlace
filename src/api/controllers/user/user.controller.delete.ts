@@ -6,7 +6,6 @@ import { ApiResponseInterface } from '../../interfaces/api-response.interface';
 /**
  * Delete a user by ID.
  */
-
 export const deleteUser = async (
 	req: Request,
 	res: Response
@@ -18,18 +17,18 @@ export const deleteUser = async (
 	*/
 
 	try {
-		/*
-		#swagger.responses[400] = {
-            schema: { 
-                success: false,
-                message: 'User ID is required.',
-                payload: 'null',
-            },
-        } 
-		*/
-
 		// Check if the user ID is provided
 		if (!req.params.id) {
+			/*
+				#swagger.responses[400] = {
+					schema: { 
+						success: false,
+						message: 'User ID is required.',
+						payload: 'null',
+					},
+				} 
+			*/
+
 			res.status(400).json({
 				success: false,
 				message: 'User ID is required.',
@@ -41,18 +40,18 @@ export const deleteUser = async (
 		// Find and delete the user by ID
 		const user = await User.findByIdAndDelete(req.params.id);
 
-		/*
-		#swagger.responses[404] = {
-            schema: { 
-                success: false,
-                message: 'User not found.',
-                payload: 'null',
-            },
-        } 
-		*/
-
 		// If the user is not found, return a 404 response
 		if (!user) {
+			/*
+				#swagger.responses[404] = {
+					schema: { 
+						success: false,
+						message: 'User not found.',
+						payload: 'null',
+					},
+				} 
+			*/
+			
 			const response: ApiResponseInterface = {
 				success: false,
 				message: 'User not found.',

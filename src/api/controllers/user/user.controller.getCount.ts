@@ -19,18 +19,18 @@ export const getUsersCount = async (
 		// Count all users in the database
 		const usersCount = await User.countDocuments({});
 
-		/*
-			#swagger.responses[404] = {
-                schema: { 
-                    success: true,
-                    message: 'No users found.',
-                    payload: '{ usersCount: 0 }',
-                },
-            }
-		*/
-
 		// If the count is zero, return a success response with a count of zero
 		if (!usersCount) {
+			/*
+				#swagger.responses[404] = {
+					schema: { 
+						success: true,
+						message: 'No users found.',
+						payload: '{ usersCount: 0 }',
+					},
+				}
+			*/
+
 			const response: ApiResponseInterface = {
 				success: false,
 				message: 'No users found.',

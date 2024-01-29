@@ -18,22 +18,22 @@ export const getUsers = async (req: Request, res: Response): Promise<void> => {
 			.select(userListAttributes)
 			.sort({ dateCreated: -1 });
 
-		/*
-			#swagger.responses[404] = {
-				schema: { 
-					success: false,
-					message: 'Users not found.',
-					payload: '[]',
-				},
-			}
-		*/
-
 		// If no users are found, return a success response with an empty array
 		if (!usersList || usersList.length === 0) {
+			/*
+				#swagger.responses[404] = {
+					schema: { 
+						success: false,
+						message: 'Users not found.',
+						payload: '{ usersList: [] }',
+					},
+				}
+			*/
+
 			const response: ApiResponseInterface = {
 				success: false,
 				message: 'Users not found.',
-				payload: [],
+				payload: { usersList: [] },
 			};
 
 			res.status(404).json(response);

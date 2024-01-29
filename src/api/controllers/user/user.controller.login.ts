@@ -28,18 +28,18 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 	*/
 
 	try {
-		/*
-			#swagger.responses[400] = {
-				schema: { 
-					success: false,
-					message: 'Email and password are required.',
-					payload: 'null',
-				},
-			}
-		*/
-
 		// Check if the email and password are provided
 		if (!req.body.email || !req.body.password) {
+			/*
+				#swagger.responses[400] = {
+					schema: { 
+						success: false,
+						message: 'Email and password are required.',
+						payload: 'null',
+					},
+				}
+			*/
+
 			res.status(400).json({
 				success: false,
 				message: 'Email and password are required.',
@@ -51,18 +51,18 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 		// Find the user by email
 		const user = await User.findOne({ email: req.body.email });
 
-		/*
-			#swagger.responses[404] = {
-				schema: { 
-					success: false,
-					message: 'User not found.',
-					payload: 'null',
-				},
-			}
-		*/
-
 		// If the user is not found, return a 404 response
 		if (!user) {
+			/*
+				#swagger.responses[404] = {
+					schema: { 
+						success: false,
+						message: 'User not found.',
+						payload: 'null',
+					},
+				}
+			*/
+
 			const response: ApiResponseInterface = {
 				success: false,
 				message: 'User not found.',
