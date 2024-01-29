@@ -5,6 +5,37 @@ import { MessageContext } from '../../interfaces/message-context/message-context
 
 // Define the product schema
 const productSchema = new mongoose.Schema({
+	name: {
+		type: String,
+		required: true,
+		unique: true,
+	},
+	description: {
+		type: String,
+		required: true,
+	},
+	longDescription: {
+		type: String,
+	},
+	image: {
+		type: String,
+		required: true,
+	},
+	images: [
+		{
+			type: String,
+		},
+	],
+	brand: {
+		type: String,
+		required: true,
+	},
+	price: {
+		type: Number,
+		required: true,
+		default: 0,
+		min: 0,
+	},
 	// Define the category field
 	category: {
 		type: mongoose.Schema.Types.ObjectId,

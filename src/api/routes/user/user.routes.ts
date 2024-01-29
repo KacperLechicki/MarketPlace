@@ -11,6 +11,7 @@ import {
 	OnlyUserGuard,
 	UserGuard,
 } from '../../../auth/jwt/jwt.auth';
+import { userOrders } from '../../controllers/user/user.controller.orders';
 
 // Create a new router object
 const router = express.Router();
@@ -38,6 +39,10 @@ router.get('/statistics/count', AdminGuard(), getUsersCount);
 // Route for updating a user
 // Only the user with the matching ID can access this route
 router.put('/:id', OnlyUserGuard(), updateUser);
+
+// Route for getting user orders
+// Only the user with the matching ID can access this route
+router.get('/:id/orders', UserGuard(), userOrders);
 
 // Route for deleting a user
 // Only the user with the matching ID or an admin can access this route

@@ -73,9 +73,38 @@ export const addOrder = async (req: Request, res: Response): Promise<void> => {
 
 		const orderItemsIdsResolved = await orderItemsIds;
 
+		// Map through the array of resolved order item IDs
+		const totalPrices = await Promise.all(
+			orderItemsIdsResolved.map(async (orderItemId: number) => {
+				// For each order item ID, find the corresponding order item in the database
+				// Populate the 'product' field of the order item to include the product's price
+				const orderItem = (await OrderItem.findById(orderItemId).populate({
+					path: 'product',
+					populate: 'price',
+				})) as OrderItemInterface & { product: { price: number } };
+
+				console.log(orderItem);
+
+				// Calculate the total price for this order item (product price * quantity)
+				const totalPrice = orderItem.product.price * orderItem.quantity;
+
+				console.log(totalPrice);
+
+				// Return the total price for this order item
+				return totalPrice;
+			})
+		);
+
+		// Reduce the array of total prices for each order item to a single total price for the entire order
+		const totalPrice = totalPrices.reduce(
+			(a: number, b: number): number => a + b,
+			0
+		);
+
 		// Create a new Order with the data from the request body and the ids of the saved OrderItems
 		let order = new Order({
 			...req.body,
+			totalPrice: totalPrice,
 			orderItems: orderItemsIdsResolved,
 		});
 
