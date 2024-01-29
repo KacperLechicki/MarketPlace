@@ -1,0 +1,2133 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "3.0.0",
+    "title": "Marketplace API Documentation",
+    "description": "REST API for E-commerce Webshop \n\n **${api} =>** /api/v1 \n\n **${auth} =>** /auth/v1"
+  },
+  "host": "localhost:3000",
+  "basePath": "",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "${api}/products/": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get all products.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          },
+          {
+            "name": "category",
+            "description": "Categories ids.",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "categories",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Products retrieved successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ productsList }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Products not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ productsList: [] }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Add new product.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Product data.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Product name"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Product short description"
+                },
+                "longDescription": {
+                  "type": "string",
+                  "example": "Product long description"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "Path to product image"
+                },
+                "images": {
+                  "type": "array",
+                  "example": [],
+                  "items": {}
+                },
+                "brand": {
+                  "type": "string",
+                  "example": "Product brand"
+                },
+                "price": {
+                  "type": "number",
+                  "example": 10
+                },
+                "stock": {
+                  "type": "number",
+                  "example": 1
+                },
+                "category": {
+                  "type": "string",
+                  "example": "Id of product category"
+                },
+                "rating": {
+                  "type": "number",
+                  "example": 6
+                },
+                "isFeatured": {
+                  "type": "boolean",
+                  "example": false
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Product created successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ createdProduct }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Product cannot be created."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "${api}/products/{id}": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get product by ID.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of product."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Product retrieved successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ product }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Product not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Update existing product.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of product."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Product data.",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Product name"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Product short description"
+                },
+                "longDescription": {
+                  "type": "string",
+                  "example": "Product long description"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "Path to product image"
+                },
+                "images": {
+                  "type": "array",
+                  "example": [],
+                  "items": {}
+                },
+                "brand": {
+                  "type": "string",
+                  "example": "Product brand"
+                },
+                "price": {
+                  "type": "number",
+                  "example": 10
+                },
+                "stock": {
+                  "type": "number",
+                  "example": 1
+                },
+                "category": {
+                  "type": "string",
+                  "example": "Id of product category"
+                },
+                "rating": {
+                  "type": "number",
+                  "example": 6
+                },
+                "isFeatured": {
+                  "type": "boolean",
+                  "example": false
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Product updated successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ product }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Product not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Delete a product by ID.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of product."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Product deleted successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Product not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "${api}/products/statistics/count": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get products count.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Products count retrieved successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ productsCount }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Products not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ productsCount: 0 }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "${api}/products/featured/{count}": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get featured products.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          },
+          {
+            "name": "count",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Count of requested feature products."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Products retrieved successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ productsList }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Products not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ productsList: [] }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "${api}/categories/": {
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Get all categories.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Categories retrieved successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ categoriesList }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Categories not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ categoriesList: [] }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Add new category.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Category data.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Category name"
+                },
+                "icon": {
+                  "type": "string",
+                  "example": "Icon"
+                },
+                "color": {
+                  "type": "string",
+                  "example": "#000000"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Category created successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ createdCategory }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Category cannot be created."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "${api}/categories/{id}": {
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Get category by ID.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of category."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Category retrieved successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ category }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Category not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Update existing category.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of category."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Category data.",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Category name"
+                },
+                "icon": {
+                  "type": "string",
+                  "example": "Icon"
+                },
+                "color": {
+                  "type": "string",
+                  "example": "#000000"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Category updated successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ category }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Category not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Delete a category by ID.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of category."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Category deleted successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Category not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "${api}/categories/statistics/count": {
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Get categories count.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Categories count retrieved successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ categoriesCount }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Categories not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ categoriesCount: 0 }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "${api}/orders/": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Get all orders.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Orders retrieved successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ orderList }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Orders not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ orderList: [] }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Add new order.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Order data.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "orderItems": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "product": {
+                        "type": "string",
+                        "example": "productID"
+                      },
+                      "quantity": {
+                        "type": "number",
+                        "example": 2
+                      }
+                    }
+                  }
+                },
+                "shippingAddress1": {
+                  "type": "string",
+                  "example": "Addres 1/4"
+                },
+                "city": {
+                  "type": "string",
+                  "example": "London2"
+                },
+                "zip": {
+                  "type": "string",
+                  "example": "888-123"
+                },
+                "country": {
+                  "type": "string",
+                  "example": "UK2"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "111 222 333"
+                },
+                "totalPrice": {
+                  "type": "number",
+                  "example": 123
+                },
+                "user": {
+                  "type": "string",
+                  "example": "UserID"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Order created successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ order }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Order cannot be created."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "${api}/orders/{id}": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Get order by ID.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of order."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Order retrieved successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ order }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Order not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Update order status.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "api",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of order."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Order status.",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "status"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Order updated successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ order }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Order not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "${auth}/users/login": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Authorize user.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "User data.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "User email"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "User password"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User logged in successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ token }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Email and password are required."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Invalid password or e-mail."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "${auth}/users/register": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Add new user.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "User data.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "User name"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "User email"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "User password"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User created successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ newUser }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Password must contain at least one special character."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User cannot be created."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "${auth}/users/": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get all users.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Users retrieved successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ usersList }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Users not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ usersList: [] }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "${auth}/users/{id}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get user by ID.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of user."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User retrieved successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ user }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User ID is required."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update existing user.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of user."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "User data.",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "User name"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "User email"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "111 222 333"
+                },
+                "address": {
+                  "type": "object",
+                  "properties": {
+                    "street": {
+                      "type": "string",
+                      "example": "Street name"
+                    },
+                    "apartment": {
+                      "type": "string",
+                      "example": "Apartment number"
+                    },
+                    "city": {
+                      "type": "string",
+                      "example": "City name"
+                    },
+                    "zip": {
+                      "type": "string",
+                      "example": "Zip code"
+                    },
+                    "country": {
+                      "type": "string",
+                      "example": "Country name"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User updated successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ updatedUser }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Password cannot be changed."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Delete a user by ID.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of user."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User deleted successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User ID is required."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User not found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "null"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "${auth}/users/statistics/count": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get users count.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A variable that stores part of the url."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Users count retrieved successfully."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ usersCount }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "No users found."
+                },
+                "payload": {
+                  "type": "string",
+                  "example": "{ usersCount: 0 }"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
